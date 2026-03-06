@@ -6,6 +6,166 @@
 <title>sabipikin - Home</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* ═══════════════════════════════
+     POPUP OVERLAY
+  ═══════════════════════════════ */
+  #sp-overlay {
+    position: fixed; inset: 0; z-index: 99999;
+    background: rgba(5, 8, 22, 0.88);
+    backdrop-filter: blur(6px);
+    display: none; align-items: center; justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  #sp-overlay.sp-open {
+    opacity: 1;
+  }
+  #sp-modal {
+    position: relative;
+    width: 100%; max-width: 900px;
+    max-height: 90vh; overflow-y: auto;
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.75), 0 0 0 1px rgba(0,200,83,0.2);
+    transform: translateY(32px) scale(0.97);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    scrollbar-width: thin; scrollbar-color: rgba(0,200,83,0.3) transparent;
+  }
+  #sp-overlay.sp-open #sp-modal {
+    transform: translateY(0) scale(1);
+  }
+  #sp-close {
+    position: absolute; top: 14px; right: 14px; z-index: 20;
+    width: 38px; height: 38px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%; color: #fff; font-size: 20px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.25s;
+    font-family: sans-serif; line-height: 1;
+  }
+  #sp-close:hover { background: rgba(255,64,129,0.5); transform: rotate(90deg); }
+
+  /* ═══════════════════════════════
+     POPUP INNER STYLES (scoped)
+  ═══════════════════════════════ */
+  #sp-modal * { box-sizing: border-box; }
+
+  #sp-banner {
+    width: 100%; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #0A0F2C 0%, #0D2137 50%, #0A1A0F 100%);
+    border-bottom: 4px solid #FFD600;
+    font-family: 'Nunito', sans-serif;
+  }
+  #sp-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,83,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,83,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: sp-grid 20s linear infinite;
+  }
+  @keyframes sp-grid { 0% { background-position: 0 0; } 100% { background-position: 40px 40px; } }
+
+  .sp-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.22; animation: sp-pulse 6s ease-in-out infinite; }
+  .sp-blob-1 { width: 380px; height: 380px; background: #00C853; top: -100px; left: -100px; }
+  .sp-blob-2 { width: 280px; height: 280px; background: #FFD600; top: 50%; right: -70px; animation-delay: 2s; }
+  .sp-blob-3 { width: 240px; height: 240px; background: #FF6D00; bottom: -70px; left: 40%; animation-delay: 4s; }
+  @keyframes sp-pulse { 0%,100% { transform:scale(1); opacity:.18; } 50% { transform:scale(1.15); opacity:.32; } }
+
+  .sp-corner { position: absolute; width: 52px; height: 52px; z-index: 3; }
+  .sp-corner-tl { top: 14px; left: 14px; border-top: 2px solid #00C853; border-left: 2px solid #00C853; }
+  .sp-corner-br { bottom: 14px; right: 14px; border-bottom: 2px solid #FFD600; border-right: 2px solid #FFD600; }
+
+  .sp-code-deco {
+    position: absolute; right: 300px; top: 20px;
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    color: rgba(0,200,83,0.2); line-height: 1.8; pointer-events: none;
+    animation: sp-code 4s ease-in-out infinite;
+  }
+  @keyframes sp-code { 0%,100% { opacity:.3; } 50% { opacity:.65; } }
+
+  .sp-inner {
+    position: relative; z-index: 2;
+    padding: 52px 44px 48px;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 36px; align-items: center;
+  }
+
+  .sp-badge-row { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+  .sp-badge { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 13px; border-radius: 2px; }
+  .sp-badge-solid { background: #00C853; color: #0A0F2C; }
+  .sp-badge-outline { background: transparent; border: 1.5px solid #FFD600; color: #FFD600; }
+
+  .sp-headline { font-family: 'Syne', sans-serif; font-weight: 800; line-height: 1.05; margin-bottom: 16px; }
+  .sp-brand { display: block; font-size: clamp(36px, 5vw, 68px); color: #fff; }
+  .sp-prog  { display: block; font-size: clamp(24px, 3.5vw, 46px); color: #00C853; }
+  .sp-sub   { display: inline-block; background: #FFD600; color: #0A0F2C; font-size: clamp(16px, 2.2vw, 30px); padding: 0 11px; margin-top: 6px; transform: rotate(-1deg); }
+
+  .sp-details { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 24px; }
+  .sp-detail { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.75); font-family: 'Nunito', sans-serif; }
+  .sp-ico { display: inline-flex; width: 26px; height: 26px; background: rgba(0,200,83,0.12); border: 1px solid rgba(0,200,83,0.3); border-radius: 5px; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  .sp-detail strong { color: #fff; }
+
+  .sp-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+  .sp-btn {
+    background: linear-gradient(135deg, #00C853, #00E676);
+    color: #0A0F2C; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px;
+    padding: 14px 32px; border-radius: 4px; text-decoration: none; display: inline-block;
+    box-shadow: 0 0 28px rgba(0,200,83,0.4); transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .sp-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 36px rgba(0,200,83,0.6); }
+  .sp-contact { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.7; font-family: 'Nunito', sans-serif; }
+  .sp-contact a { color: #FFD600; text-decoration: none; font-weight: 700; }
+
+  .sp-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(0,200,83,0.22);
+    border-radius: 10px; padding: 24px 20px; min-width: 205px; max-width: 245px;
+    backdrop-filter: blur(12px);
+  }
+  .sp-card-title { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: #00C853; margin-bottom: 14px; border-bottom: 1px solid rgba(0,200,83,0.18); padding-bottom: 8px; }
+  .sp-fee { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 28px; color: #FFD600; line-height: 1; margin-bottom: 3px; }
+  .sp-fee-sub { font-size: 11px; color: rgba(255,255,255,0.45); margin-bottom: 14px; font-family: 'Nunito', sans-serif; }
+  .sp-perk { display: flex; align-items: flex-start; gap: 7px; font-size: 12px; color: rgba(255,255,255,0.65); margin-bottom: 7px; line-height: 1.4; font-family: 'Nunito', sans-serif; }
+  .sp-perk::before { content: '✦'; color: #00C853; font-size: 9px; margin-top: 2px; flex-shrink: 0; }
+  .sp-seats { margin-top: 14px; background: rgba(255,64,129,0.12); border: 1px solid rgba(255,64,129,0.35); border-radius: 4px; padding: 7px 9px; font-size: 11px; color: #FF80AB; font-weight: 700; text-align: center; font-family: 'Nunito', sans-serif; }
+
+  /* Ticker */
+  #sp-ticker { background: #FFD600; overflow: hidden; height: 50px; display: flex; align-items: center; }
+  .sp-ticker-track { display: flex; white-space: nowrap; animation: sp-tick 22s linear infinite; }
+  .sp-ticker-track:hover { animation-play-state: paused; }
+  @keyframes sp-tick { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .sp-tick-item { display: inline-flex; align-items: center; gap: 10px; padding: 0 28px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 13px; color: #0A0F2C; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+  .sp-tick-dot { display: inline-block; width: 7px; height: 7px; background: #007A36; border-radius: 50%; flex-shrink: 0; }
+
+  /* Features */
+  #sp-features { background: #0D1528; display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid rgba(0,200,83,0.1); }
+  .sp-feat { padding: 20px 16px; display: flex; align-items: center; gap: 12px; border-right: 1px solid rgba(0,200,83,0.08); }
+  .sp-feat:last-child { border-right: none; }
+  .sp-feat-icon { font-size: 22px; flex-shrink: 0; }
+  .sp-feat strong { display: block; font-size: 12px; font-weight: 800; color: #fff; margin-bottom: 2px; font-family: 'Nunito', sans-serif; }
+  .sp-feat span { font-size: 10.5px; color: rgba(255,255,255,0.4); font-family: 'Nunito', sans-serif; }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .sp-inner { grid-template-columns: 1fr; padding: 36px 22px; gap: 22px; }
+    .sp-card { max-width: 100%; }
+    .sp-code-deco { display: none; }
+    #sp-features { grid-template-columns: repeat(2,1fr); }
+    .sp-feat:nth-child(2) { border-right: none; }
+    .sp-feat:nth-child(3) { border-right: 1px solid rgba(0,200,83,0.08); }
+  }
+  @media (max-width: 420px) {
+    .sp-brand { font-size: 30px; }
+    .sp-prog  { font-size: 20px; }
+    #sp-features { grid-template-columns: 1fr; }
+    .sp-feat { border-right: none; border-bottom: 1px solid rgba(0,200,83,0.08); }
+    .sp-btn { width: 100%; text-align: center; }
+  }
+</style>
 </head>
 
 <body>
@@ -18,6 +178,7 @@
             <li><a href="advanced-code.html">Advanced Code Programs</a></li>
             <li><a href="flp.html">Future Leaders Program</a></li>
             <li><a href="low-no-code.html">No Code/Low Code Programs</a></li>
+            <li><a href="kidsbootcamp.html">April 2026 Kids BootCamp</a></li>
             <li><a href="https://sabipikinhelp.netlify.app">Get Academic Help</a></li>
         </ul>
     </div>
@@ -57,7 +218,6 @@
 
 <section class="container">
     <div class="cards">
-        <!-- Advanced Code Programs -->
         <div class="card">
             <h3>💻 Advanced Code Programs</h3>
             <p>Master professional-level coding in AI, DevOps, Data Analysis, and Generative Intelligence. Perfect for developers looking to specialize.</p>
@@ -70,8 +230,6 @@
             </ul>
             <a href="advanced-code.html" class="btn btn-secondary" style="display: inline-block; margin-top: 15px; font-size: 0.9rem; padding: 10px 20px;">Learn More →</a>
         </div>
-
-        <!-- Future Leaders Program -->
         <div class="card">
             <h3>🌟 Future Leaders Academy</h3>
             <p>3-level career pathway for young minds (11-18) to build confidence and real coding skills in a supportive environment.</p>
@@ -83,8 +241,6 @@
             </ul>
             <a href="flp.html" class="btn btn-secondary" style="display: inline-block; margin-top: 15px; font-size: 0.9rem; padding: 10px 20px;">Learn More →</a>
         </div>
-
-        <!-- No-Code/Low-Code Programs -->
         <div class="card">
             <h3>⚡ No-Code/Low-Code Programs</h3>
             <p>Build powerful applications and automate workflows without traditional coding. For professionals and entrepreneurs.</p>
@@ -104,36 +260,12 @@
 <section class="container">
     <h2 class="section-title">Why Choose Sabi Educate?</h2>
     <div class="features">
-        <div class="feature-card">
-            <div class="feature-icon">👨‍🏫</div>
-            <h4>Expert Instructors</h4>
-            <p>Learn from industry professionals with real-world experience.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h4>Career-Focused</h4>
-            <p>Programs designed to advance your career and skills.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">👥</div>
-            <h4>Small Cohorts</h4>
-            <p>Personalized attention and meaningful interactions.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">💼</div>
-            <h4>Portfolio Projects</h4>
-            <p>Build real projects for your professional portfolio.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">🔗</div>
-            <h4>Mentorship</h4>
-            <p>Ongoing guidance and career support from experts.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">🏆</div>
-            <h4>Certification</h4>
-            <p>Industry-recognized credentials upon completion.</p>
-        </div>
+        <div class="feature-card"><div class="feature-icon">👨‍🏫</div><h4>Expert Instructors</h4><p>Learn from industry professionals with real-world experience.</p></div>
+        <div class="feature-card"><div class="feature-icon">🎯</div><h4>Career-Focused</h4><p>Programs designed to advance your career and skills.</p></div>
+        <div class="feature-card"><div class="feature-icon">👥</div><h4>Small Cohorts</h4><p>Personalized attention and meaningful interactions.</p></div>
+        <div class="feature-card"><div class="feature-icon">💼</div><h4>Portfolio Projects</h4><p>Build real projects for your professional portfolio.</p></div>
+        <div class="feature-card"><div class="feature-icon">🔗</div><h4>Mentorship</h4><p>Ongoing guidance and career support from experts.</p></div>
+        <div class="feature-card"><div class="feature-icon">🏆</div><h4>Certification</h4><p>Industry-recognized credentials upon completion.</p></div>
     </div>
 </section>
 
@@ -152,6 +284,118 @@
     <p style="margin-top: 20px;">www.sabipikin.xyz</p>
     <p>Email: <a href="mailto:admin@sabipikin.xyz">admin@sabipikin.xyz</a> | Phone: +234 7037 154 753</p>
 </footer>
+
+
+<!-- ═══════════════════════════════════════════════
+     BOOTCAMP POPUP
+════════════════════════════════════════════════ -->
+<div id="sp-overlay" role="dialog" aria-modal="true" aria-label="April Coding Bootcamp 2026">
+  <div id="sp-modal">
+    <button id="sp-close" aria-label="Close">&times;</button>
+
+    <div id="sp-banner">
+      <div class="sp-blob sp-blob-1"></div>
+      <div class="sp-blob sp-blob-2"></div>
+      <div class="sp-blob sp-blob-3"></div>
+      <div class="sp-corner sp-corner-tl"></div>
+      <div class="sp-corner sp-corner-br"></div>
+      <div class="sp-code-deco">
+        &lt;if age &gt;= 9&gt;<br>
+        &nbsp;&nbsp;learn_to_code();<br>
+        &lt;/if&gt;<br><br>
+        def build_future():<br>
+        &nbsp;&nbsp;return "🚀"
+      </div>
+      <div class="sp-inner">
+        <div>
+          <div class="sp-badge-row">
+            <span class="sp-badge sp-badge-solid">Sabi Pikin</span>
+            <span class="sp-badge sp-badge-outline">Ages 9 – 14</span>
+          </div>
+          <div class="sp-headline">
+            <span class="sp-brand">April Coding</span>
+            <span class="sp-prog">Bootcamp 2026</span>
+            <span class="sp-sub">2 Weeks · Real Projects · Big Dreams</span>
+          </div>
+          <div class="sp-details">
+            <div class="sp-detail"><span class="sp-ico">📅</span><span><strong>Apr 14 – 25, 2026</strong> &nbsp;Mon – Fri</span></div>
+            <div class="sp-detail"><span class="sp-ico">⏰</span><span><strong>3:00 PM – 5:00 PM</strong> daily</span></div>
+            <div class="sp-detail"><span class="sp-ico">📍</span><span>Lagos, Nigeria</span></div>
+            <div class="sp-detail"><span class="sp-ico">🎓</span><span>Scratch · App Design · Creative Coding</span></div>
+            <div class="sp-detail"><span class="sp-ico">🏆</span><span>Exhibition Day — <strong>April 25</strong></span></div>
+          </div>
+          <div class="sp-cta">
+            <a href="kidsbootcamp.html" class="sp-btn" target="_blank">Register Now →</a>
+            <div class="sp-contact">
+              <a href="index.html" target="_blank">sabipikin.xyz</a> &nbsp;·&nbsp;
+              <a href="mailto:admins@sabipikin.xyz">admins@sabipikin.xyz</a><br>
+              WhatsApp: <a href="https://wa.me/2347037154753">+234 703 715 4753</a>
+            </div>
+          </div>
+        </div>
+        <div class="sp-card">
+          <div class="sp-card-title">📋 Enrollment Info</div>
+          <div class="sp-fee">₦200,000</div>
+          <div class="sp-fee-sub">per child · all-inclusive</div>
+          <div class="sp-perk">Daily snack & drink included</div>
+          <div class="sp-perk">Certificate of completion</div>
+          <div class="sp-perk">Parent Exhibition Day (2 guests)</div>
+          <div class="sp-perk">Hands-on project experience</div>
+          <div class="sp-perk">Fun activities on final day</div>
+          <div class="sp-seats">⚡ Limited Seats — Act Fast!</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="sp-ticker">
+      <div class="sp-ticker-track">
+        <span class="sp-tick-item">🚀 Register Now <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">sabipikin.xyz <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">April 14 – 25 · Lagos <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">₦200,000 per child <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">Ages 9 – 14 years <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">Limited Seats Available <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">WhatsApp: +234 703 715 4753 <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">🚀 Register Now <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">sabipikin.xyz <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">April 14 – 25 · Lagos <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">₦200,000 per child <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">Ages 9 – 14 years <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">Limited Seats Available <span class="sp-tick-dot"></span></span>
+        <span class="sp-tick-item">WhatsApp: +234 703 715 4753 <span class="sp-tick-dot"></span></span>
+      </div>
+    </div>
+
+    <div id="sp-features">
+      <div class="sp-feat"><span class="sp-feat-icon">🎮</span><div><strong>Scratch Programming</strong><span>Build games & animations</span></div></div>
+      <div class="sp-feat"><span class="sp-feat-icon">📱</span><div><strong>App Development</strong><span>Design real mobile concepts</span></div></div>
+      <div class="sp-feat"><span class="sp-feat-icon">🧠</span><div><strong>Computational Thinking</strong><span>Logic & problem solving</span></div></div>
+      <div class="sp-feat"><span class="sp-feat-icon">🏅</span><div><strong>Exhibition Day</strong><span>April 25 · Celebrate & present</span></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('sp-overlay');
+
+  function openPopup() {
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => requestAnimationFrame(() => overlay.classList.add('sp-open')));
+  }
+  function closePopup() {
+    overlay.classList.remove('sp-open');
+    document.body.style.overflow = '';
+    setTimeout(() => { overlay.style.display = 'none'; }, 350);
+  }
+
+  document.getElementById('sp-close').addEventListener('click', closePopup);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePopup(); });
+
+  // Auto-open after 2 seconds
+  setTimeout(openPopup, 2000);
+</script>
 
 </body>
 </html>

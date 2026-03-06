@@ -14,7 +14,7 @@ body {
     line-height: 1.6;
 }
 
-/* Navigation */
+/* ─── Navigation ─────────────────────────────────── */
 nav {
     background: #0f172a;
     padding: 15px 20px;
@@ -29,9 +29,9 @@ nav {
     max-width: 1100px;
     margin: auto;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    gap: 40px;
+    gap: 20px;
 }
 
 .logo {
@@ -43,6 +43,33 @@ nav {
     align-items: center;
     flex-shrink: 0;
 }
+
+/* Hamburger button — hidden on desktop */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 200;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animate hamburger → X when open */
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .nav-links {
     display: flex;
@@ -58,6 +85,8 @@ nav {
     font-weight: 500;
     font-size: 1.1rem;
     transition: color 0.3s ease;
+    /* Bigger tap target */
+    padding: 6px 2px;
 }
 
 .nav-links a:hover {
@@ -70,7 +99,7 @@ nav {
     padding-bottom: 5px;
 }
 
-/* Container */
+/* ─── Container ──────────────────────────────────── */
 .container {
     width: 90%;
     max-width: 1100px;
@@ -78,7 +107,7 @@ nav {
     padding: 60px 0;
 }
 
-/* Hero Section */
+/* ─── Hero Section ───────────────────────────────── */
 .hero {
     background: linear-gradient(135deg, #0f172a, #0ea5a4);
     color: white;
@@ -98,7 +127,7 @@ nav {
     margin: auto;
 }
 
-/* Buttons */
+/* ─── Buttons ─────────────────────────────────────── */
 .btn {
     display: inline-block;
     margin-top: 30px;
@@ -112,6 +141,8 @@ nav {
     border: 2px solid white;
     cursor: pointer;
     font-size: 1rem;
+    /* Prevent text wrapping on small screens */
+    white-space: nowrap;
 }
 
 .btn:hover {
@@ -132,7 +163,7 @@ nav {
     color: #0f172a;
 }
 
-/* Section Title */
+/* ─── Section Title ───────────────────────────────── */
 .section-title {
     text-align: center;
     font-size: 2rem;
@@ -140,7 +171,7 @@ nav {
     color: #0f172a;
 }
 
-/* Cards Grid */
+/* ─── Cards Grid ──────────────────────────────────── */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -183,7 +214,7 @@ nav {
     margin-bottom: 10px;
 }
 
-/* Highlight Section */
+/* ─── Highlight Section ───────────────────────────── */
 .highlight {
     background: #0ea5a4;
     color: white;
@@ -202,7 +233,7 @@ nav {
     margin: auto;
 }
 
-/* Labels */
+/* ─── Labels ──────────────────────────────────────── */
 .label {
     display: inline-block;
     padding: 6px 12px;
@@ -222,7 +253,7 @@ nav {
     color: white;
 }
 
-/* Footer */
+/* ─── Footer ──────────────────────────────────────── */
 .footer {
     background: #0f172a;
     color: white;
@@ -244,7 +275,7 @@ nav {
     margin: 10px 0;
 }
 
-/* Feature Grid */
+/* ─── Feature Grid ────────────────────────────────── */
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -267,22 +298,207 @@ nav {
     color: #0f172a;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+═══════════════════════════════════════════════════ */
+
+/* ─── Tablet (≤ 900px) ───────────────────────────── */
+@media (max-width: 900px) {
+    .nav-container {
+        gap: 10px;
+    }
+
     .nav-links {
-        gap: 15px;
-        font-size: 0.9rem;
+        gap: 12px;
     }
-    
+
+    .nav-links a {
+        font-size: 0.95rem;
+    }
+
     .hero h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
-    
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .highlight h2 {
+        font-size: 1.75rem;
+    }
+}
+
+/* ─── Mobile (≤ 768px) ───────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Show hamburger, hide inline nav */
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #0f172a;
+        padding: 16px 20px 24px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        font-size: 1.05rem;
+        padding: 12px 4px;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        width: 100%;
+    }
+
+    .nav-links li:last-child a {
+        border-bottom: none;
+    }
+
+    .nav-links a.active {
+        border-bottom-color: rgba(255,255,255,0.07);
+        padding-bottom: 12px;
+    }
+
+    /* Hero */
+    .hero {
+        padding: 70px 20px;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /* Stack hero buttons vertically if multiple */
+    .hero .btn + .btn {
+        margin-left: 0;
+        margin-top: 14px;
+        display: block;
+        width: fit-content;
+        margin-inline: auto;
+    }
+
+    /* Container */
+    .container {
+        padding: 40px 0;
+    }
+
+    /* Section titles */
     .section-title {
         font-size: 1.5rem;
+        margin-bottom: 28px;
     }
-    
+
+    /* Cards — single column */
     .cards {
         grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .card {
+        padding: 22px 20px;
+        /* Disable lift animation on touch — tap is instantaneous */
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+        transform: none;
+    }
+
+    /* Highlight */
+    .highlight {
+        padding: 50px 20px;
+    }
+
+    .highlight h2 {
+        font-size: 1.5rem;
+    }
+
+    .highlight p {
+        font-size: 1rem;
+    }
+
+    /* Features — 2 col on mobile */
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 28px 0;
+    }
+
+    .feature-card {
+        padding: 18px 12px;
+    }
+
+    .feature-icon {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 32px 20px;
+        margin-top: 40px;
+    }
+}
+
+/* ─── Small Mobile (≤ 480px) ─────────────────────── */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .hero {
+        padding: 50px 16px;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        padding: 12px 22px;
+        font-size: 0.95rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .highlight h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Features — single column on very small screens */
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 18px 16px;
+    }
+
+    .label {
+        font-size: 0.75rem;
     }
 }
