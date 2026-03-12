@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Analytics & Business Intelligence | Programme Prospectus 2026/27</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,700;1,9..144,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0D1A12; --forest:#0A2017; --green-deep:#0E4A2A;
+  --green:#116E3C; --green-mid:#18A355; --green-pop:#22C96A;
+  --gold:#C17B2A; --gold-light:#E09A40; --gold-pale:#FBF0DC;
+  --parchment:#F7F3EC; --linen:#EDE8DF; --white:#FFFFFF;
+  --text:#1A2E20; --muted:#607265; --border:#D6CFBF; --border-lt:#E8E2D8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--parchment);color:var(--text);font-family:'Instrument Sans',sans-serif;font-weight:400;line-height:1.65;overflow-x:hidden;}
+
+/* RIBBON */
+.ribbon{position:sticky;top:0;z-index:100;background:var(--forest);display:flex;justify-content:space-between;align-items:center;padding:0 56px;height:48px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.ribbon-brand{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:rgba(255,255,255,0.5);text-transform:uppercase;}
+.ribbon-nav{display:flex;gap:32px;}
+.ribbon-nav a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;}
+.ribbon-nav a:hover{color:var(--gold-light);}
+.ribbon-pill{display:flex;align-items:center;gap:7px;background:rgba(34,201,106,0.1);border:1px solid rgba(34,201,106,0.25);color:var(--green-pop);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;padding:5px 12px;}
+.ribbon-dot{width:5px;height:5px;background:var(--green-pop);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.6);}}
+
+/* HERO */
+.hero{background:var(--forest);min-height:96vh;display:grid;grid-template-columns:1fr 400px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:72px 72px;}
+.bar-group{position:absolute;right:0;bottom:0;width:480px;height:100%;display:flex;align-items:flex-end;justify-content:flex-end;gap:10px;padding:0 48px 0 0;opacity:0.07;}
+.bar{width:36px;background:linear-gradient(to top,var(--green-pop),var(--green-mid));border-radius:2px 2px 0 0;transform-origin:bottom;animation:barGrow 1.4s cubic-bezier(0.22,1,0.36,1) both;}
+@keyframes barGrow{from{transform:scaleY(0);}to{transform:scaleY(1);}}
+.b1{height:35%;animation-delay:0.1s;}.b2{height:55%;animation-delay:0.2s;}.b3{height:42%;animation-delay:0.3s;}.b4{height:78%;animation-delay:0.4s;}.b5{height:60%;animation-delay:0.5s;}.b6{height:88%;animation-delay:0.6s;}.b7{height:70%;animation-delay:0.7s;}.b8{height:95%;animation-delay:0.8s;}.b9{height:52%;animation-delay:0.9s;}
+
+.hero-left{padding:80px 56px 0;display:flex;flex-direction:column;justify-content:flex-end;position:relative;z-index:2;}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);margin-bottom:36px;animation:fadeUp 0.7s ease both;}
+.hero-tag-line{width:32px;height:1px;background:var(--gold-light);}
+.hero-title{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(50px,7vw,98px);line-height:0.9;color:var(--parchment);letter-spacing:-0.02em;animation:fadeUp 0.7s 0.1s ease both;}
+.hero-title .accent{font-style:italic;color:var(--gold-light);}
+.hero-sub{max-width:500px;font-size:15px;line-height:1.8;color:rgba(247,243,236,0.5);margin-top:28px;animation:fadeUp 0.7s 0.2s ease both;}
+.hero-actions{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap;animation:fadeUp 0.7s 0.3s ease both;}
+.btn-hp{background:var(--green-mid);color:var(--white);font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.04em;padding:13px 28px;border:none;text-decoration:none;display:inline-block;transition:background 0.2s,transform 0.2s;}
+.btn-hp:hover{background:var(--green-deep);transform:translateY(-2px);}
+.btn-hg{background:transparent;color:rgba(247,243,236,0.6);font-family:'Instrument Sans',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.04em;padding:12px 28px;border:1px solid rgba(255,255,255,0.12);text-decoration:none;display:inline-block;transition:border-color 0.2s,color 0.2s;}
+.btn-hg:hover{border-color:var(--gold-light);color:var(--gold-light);}
+
+.stats-bar{border-top:1px solid rgba(255,255,255,0.08);margin-top:60px;display:grid;grid-template-columns:repeat(4,1fr);animation:fadeUp 0.7s 0.4s ease both;}
+.hs{padding:24px 0 28px;border-right:1px solid rgba(255,255,255,0.06);}
+.hs:last-child{border-right:none;}
+.hs-n{font-family:'Fraunces',serif;font-weight:800;font-size:38px;line-height:1;color:var(--parchment);}
+.hs-n sup{font-size:14px;color:var(--green-pop);font-family:'JetBrains Mono',monospace;}
+.hs-l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(247,243,236,0.3);margin-top:5px;}
+
+.hero-right{background:rgba(255,255,255,0.02);border-left:1px solid rgba(255,255,255,0.06);padding:56px 40px;display:flex;flex-direction:column;gap:0;position:relative;z-index:2;justify-content:center;}
+.hr-eye{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,243,236,0.25);margin-bottom:28px;}
+.qf{padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.qf:last-child{border-bottom:none;}
+.qf-l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:5px;}
+.qf-v{font-size:13px;font-weight:500;color:rgba(247,243,236,0.7);line-height:1.55;}
+
+/* SHARED */
+.s{padding:96px 56px;position:relative;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--green);}
+.sh{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(28px,3.5vw,50px);color:var(--ink);line-height:1.05;letter-spacing:-0.02em;max-width:680px;margin-bottom:16px;}
+.sh em{font-style:italic;color:var(--green);}
+.sp{font-size:15px;color:var(--muted);max-width:580px;margin-bottom:56px;line-height:1.8;}
+
+/* OVERVIEW */
+.bg-linen{background:var(--linen);border-top:1px solid var(--border-lt);}
+.ov-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;border:1px solid var(--border);background:var(--border);gap:1px;}
+.ov-main{background:var(--forest);padding:48px 44px;position:relative;overflow:hidden;}
+.ov-main::after{content:'';position:absolute;bottom:-60px;right:-60px;width:220px;height:220px;border:1px solid rgba(255,255,255,0.05);border-radius:50%;box-shadow:0 0 0 40px rgba(255,255,255,0.02);}
+.ov-eye{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);margin-bottom:18px;}
+.ov-h{font-family:'Fraunces',serif;font-weight:800;font-size:24px;color:var(--parchment);line-height:1.25;margin-bottom:18px;letter-spacing:-0.01em;}
+.ov-p{font-size:13px;color:rgba(247,243,236,0.5);line-height:1.8;}
+.ov-col{background:var(--white);}
+.ov-ch{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);padding:20px 24px 14px;border-bottom:1px solid var(--border-lt);background:var(--parchment);}
+.ov-list{list-style:none;}
+.ov-list li{padding:13px 24px;border-bottom:1px solid var(--border-lt);font-size:13px;font-weight:500;color:var(--text);display:flex;align-items:center;gap:10px;transition:background 0.2s,padding-left 0.2s;}
+.ov-list li:last-child{border-bottom:none;}
+.ov-list li:hover{background:var(--gold-pale);padding-left:30px;}
+.ov-list li::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;flex-shrink:0;}
+
+/* COURSES */
+.ctable{border:1px solid var(--border);background:var(--border);display:grid;gap:1px;}
+.cr{background:var(--white);display:grid;grid-template-columns:64px 1fr 200px;transition:background 0.25s;min-height:110px;}
+.cr:hover{background:#FBFEF8;}
+.cr.fin{background:var(--forest);}
+.cr.fin:hover{background:#0d2a1e;}
+.cn{display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border-lt);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:0.08em;writing-mode:vertical-rl;text-transform:uppercase;padding:16px 0;background:var(--parchment);}
+.cr.fin .cn{background:rgba(255,255,255,0.03);color:rgba(247,243,236,0.25);border-color:rgba(255,255,255,0.06);}
+.cb{padding:22px 28px;border-right:1px solid var(--border-lt);}
+.cr.fin .cb{border-color:rgba(255,255,255,0.07);}
+.ct{font-family:'Fraunces',serif;font-weight:700;font-size:16px;color:var(--ink);line-height:1.3;margin-bottom:6px;letter-spacing:-0.01em;}
+.cr.fin .ct{color:var(--parchment);}
+.cd{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:12px;}
+.cr.fin .cd{color:rgba(247,243,236,0.4);}
+.chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);background:rgba(17,110,60,0.07);border:1px solid rgba(17,110,60,0.18);padding:3px 9px;}
+.cr.fin .chip{color:var(--gold-light);background:rgba(193,123,42,0.1);border-color:rgba(193,123,42,0.25);}
+.cm{padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;}
+.cdur{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.cdur::before{content:'◷';font-size:12px;}
+.cr.fin .cdur{color:rgba(247,243,236,0.3);}
+.eb{background:var(--gold-pale);border:1px solid rgba(193,123,42,0.2);padding:10px 14px;}
+.cr.fin .eb{background:rgba(193,123,42,0.08);border-color:rgba(193,123,42,0.28);}
+.el{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.er{font-size:11px;font-weight:600;color:var(--ink);line-height:1.35;}
+.cr.fin .er{color:var(--gold-light);}
+
+/* TOOLS */
+.tgrid{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--border);background:var(--border);gap:1px;}
+.tc{background:var(--white);padding:36px 28px;transition:background 0.3s,transform 0.3s;position:relative;overflow:hidden;}
+.tc:hover{background:var(--forest);transform:translateY(-6px);box-shadow:0 16px 40px rgba(10,32,23,0.18);z-index:1;}
+.ti{width:42px;height:42px;background:rgba(17,110,60,0.08);border:1px solid rgba(17,110,60,0.14);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px;transition:all 0.3s;}
+.tc:hover .ti{background:rgba(193,123,42,0.12);border-color:rgba(193,123,42,0.3);}
+.tn{font-family:'Fraunces',serif;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:8px;transition:color 0.3s;}
+.tc:hover .tn{color:var(--parchment);}
+.td{font-size:11px;color:var(--muted);line-height:1.65;transition:color 0.3s;}
+.tc:hover .td{color:rgba(247,243,236,0.45);}
+
+/* OUTCOMES */
+.ol{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+.op{background:var(--forest);padding:48px 44px;position:relative;overflow:hidden;}
+.op::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));}
+.op-e{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);margin-bottom:18px;}
+.op-t{font-family:'Fraunces',serif;font-weight:800;font-size:22px;color:var(--parchment);line-height:1.2;margin-bottom:28px;letter-spacing:-0.01em;}
+.opl{list-style:none;display:flex;flex-direction:column;gap:14px;}
+.opl li{display:flex;gap:12px;font-size:13px;color:rgba(247,243,236,0.65);line-height:1.7;}
+.opl li::before{content:'→';color:var(--gold-light);font-family:'JetBrains Mono',monospace;flex-shrink:0;margin-top:1px;}
+.rl{border:1px solid var(--border);background:var(--border);display:grid;gap:1px;}
+.ri{background:var(--white);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:background 0.2s,padding-left 0.25s;}
+.ri:hover{background:var(--gold-pale);padding-left:38px;}
+.rn{font-family:'Fraunces',serif;font-weight:700;font-size:15px;color:var(--ink);}
+.rb{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);background:rgba(17,110,60,0.07);border:1px solid rgba(17,110,60,0.18);padding:4px 10px;white-space:nowrap;}
+
+/* CERT */
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);background:var(--border);gap:1px;}
+.cc{background:var(--white);padding:32px 28px;transition:background 0.3s;position:relative;overflow:hidden;}
+.cc::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--green-pop));transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.cc:hover{background:var(--forest);}
+.cc:hover::before{transform:scaleX(1);}
+.ccn{font-family:'Fraunces',serif;font-size:52px;font-weight:900;color:rgba(17,110,60,0.06);line-height:1;margin-bottom:14px;transition:color 0.3s;}
+.cc:hover .ccn{color:rgba(247,243,236,0.05);}
+.ccname{font-family:'Fraunces',serif;font-weight:700;font-size:15px;color:var(--ink);line-height:1.3;margin-bottom:10px;transition:color 0.3s;}
+.cc:hover .ccname{color:var(--parchment);}
+.ccd{font-size:12px;color:var(--muted);line-height:1.65;transition:color 0.3s;}
+.cc:hover .ccd{color:rgba(247,243,236,0.4);}
+
+/* WHY */
+.why-bg{background:var(--forest);position:relative;overflow:hidden;}
+.why-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(34,201,106,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(34,201,106,0.04) 1px,transparent 1px);background-size:64px 64px;}
+.wi{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.wt{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(32px,4vw,54px);color:var(--parchment);line-height:1.0;letter-spacing:-0.02em;}
+.wt em{font-style:italic;color:var(--gold-light);}
+.ws{font-size:14px;color:rgba(247,243,236,0.45);margin-top:18px;line-height:1.8;max-width:380px;}
+.wlist{display:flex;flex-direction:column;gap:0;border:1px solid rgba(255,255,255,0.06);}
+.wr{padding:22px 26px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:flex-start;gap:16px;transition:background 0.2s;}
+.wr:last-child{border-bottom:none;}
+.wr:hover{background:rgba(255,255,255,0.03);}
+.wc{width:22px;height:22px;flex-shrink:0;margin-top:1px;background:linear-gradient(135deg,var(--green-deep),var(--green));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--white);font-weight:600;}
+.wtx{font-size:14px;color:rgba(247,243,236,0.65);line-height:1.65;}
+.wtx strong{color:var(--parchment);font-weight:600;}
+
+/* FIT STRIP */
+.fit-strip{background:var(--gold-pale);border-top:1px solid rgba(193,123,42,0.18);border-bottom:1px solid rgba(193,123,42,0.18);padding:24px 56px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.fl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+.fsep{width:1px;height:24px;background:rgba(193,123,42,0.25);flex-shrink:0;}
+.ftags{display:flex;gap:10px;flex-wrap:wrap;}
+.ftag{font-size:12px;font-weight:500;color:var(--ink);background:var(--white);border:1px solid rgba(193,123,42,0.22);padding:6px 16px;}
+
+/* CTA */
+.bg-parch{background:var(--parchment);}
+.cta-w{border:1px solid var(--border);background:var(--white);display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;padding:60px 56px;position:relative;overflow:hidden;}
+.cta-w::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,var(--green),var(--gold));}
+.cta-h{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(26px,3vw,42px);color:var(--ink);line-height:1.1;letter-spacing:-0.02em;margin-bottom:12px;}
+.cta-h em{font-style:italic;color:var(--green);}
+.cta-p{font-size:14px;color:var(--muted);max-width:500px;line-height:1.75;}
+.cta-btns{display:flex;flex-direction:column;gap:10px;min-width:190px;}
+.btn-cp{background:var(--forest);color:var(--parchment);font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.04em;padding:14px 28px;border:2px solid var(--forest);text-align:center;text-decoration:none;display:block;transition:background 0.2s;}
+.btn-cp:hover{background:var(--green-deep);border-color:var(--green-deep);}
+.btn-co{background:transparent;color:var(--text);font-family:'Instrument Sans',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.04em;padding:13px 28px;border:1px solid var(--border);text-align:center;text-decoration:none;display:block;transition:border-color 0.2s,color 0.2s;}
+.btn-co:hover{border-color:var(--green);color:var(--green);}
+
+/* FOOTER */
+footer{background:var(--forest);padding:32px 56px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;border-top:1px solid rgba(255,255,255,0.05);}
+.fb{font-family:'Fraunces',serif;font-weight:700;font-size:18px;color:var(--parchment);}
+.fb span{font-style:italic;color:var(--gold-light);}
+.fm{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(247,243,236,0.25);text-align:right;line-height:1.9;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:none;}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.shown{opacity:1;transform:none;}
+
+@media(max-width:960px){
+  .ribbon-nav{display:none;}
+  .hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .stats-bar{grid-template-columns:repeat(2,1fr);}
+  .ov-grid,.ol,.wi,.cgrid,.cta-w{grid-template-columns:1fr;}
+  .tgrid{grid-template-columns:repeat(2,1fr);}
+  .cr{grid-template-columns:48px 1fr;}
+  .cm{display:none;}
+  .s{padding:56px 20px;}
+  .fit-strip{padding:20px;}
+  .cta-btns{flex-direction:row;}
+  footer,.ribbon{padding-left:20px;padding-right:20px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="ribbon">
+  <div class="ribbon-brand">DA &amp; BI Programme · 2026/27</div>
+  <div class="ribbon-nav">
+    <a href="#overview">Overview</a>
+    <a href="#curriculum">Curriculum</a>
+    <a href="#tools">Tools</a>
+    <a href="#outcomes">Outcomes</a>
+    <a href="#apply">Apply</a>
+  </div>
+  <div class="ribbon-pill"><div class="ribbon-dot"></div>Enrolment Open</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-grid-lines"></div>
+    <div class="bar-group">
+      <div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div>
+      <div class="bar b4"></div><div class="bar b5"></div><div class="bar b6"></div>
+      <div class="bar b7"></div><div class="bar b8"></div><div class="bar b9"></div>
+    </div>
+  </div>
+
+  <div class="hero-left">
+    <div class="hero-tag"><div class="hero-tag-line"></div>Programme Prospectus · 2026 / 2027</div>
+    <h1 class="hero-title">
+      Data<br>
+      <span class="accent">Analytics</span><br>
+      &amp; Business<br>Intelligence
+    </h1>
+    <p class="hero-sub">Master the tools and thinking that turn raw organisational data into decisions, dashboards, and competitive advantage — zero coding required.</p>
+    <div class="hero-actions">
+      <a href="https://form.jotform.com/260541505232042" target="_blank" class="btn-hp">Apply Now →</a>
+      <a href="#curriculum" class="btn-hg">Explore Curriculum</a>
+    </div>
+    <div class="stats-bar">
+      <div class="hs"><div class="hs-n">6<sup>courses</sup></div><div class="hs-l">Stackable</div></div>
+      <div class="hs"><div class="hs-n">5<sup>tools</sup></div><div class="hs-l">Industry Platforms</div></div>
+      <div class="hs"><div class="hs-n">0</div><div class="hs-l">Code Required</div></div>
+      <div class="hs"><div class="hs-n">6<sup>+</sup></div><div class="hs-l">Career Exit Roles</div></div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hr-eye">Programme at a Glance</div>
+    <div class="qf"><div class="qf-l">Programme Type</div><div class="qf-v">No-Code / Low-Code · Stackable Courses</div></div>
+    <div class="qf"><div class="qf-l">Delivery Modes</div><div class="qf-v">One-on-One &amp; Self-Paced Available</div></div>
+    <div class="qf"><div class="qf-l">Primary Tools</div><div class="qf-v">Power BI · Looker Studio · Airtable · Excel · Sheets</div></div>
+    <div class="qf"><div class="qf-l">Target Roles</div><div class="qf-v">Business Data Analyst · BI Analyst · Reporting Specialist · Ops Analyst</div></div>
+    <div class="qf"><div class="qf-l">Final Certification</div><div class="qf-v">Data Analytics &amp; BI Specialist — Issued after Course 6</div></div>
+    <div class="qf"><div class="qf-l">Cohort Year</div><div class="qf-v">2026 / 2027</div></div>
+  </div>
+</section>
+
+<!-- FIT STRIP -->
+<div class="fit-strip">
+  <div class="fl">Strong Fit With</div><div class="fsep"></div>
+  <div class="ftags">
+    <div class="ftag">GRC — Reporting &amp; Audits</div>
+    <div class="ftag">Product Management — Metrics &amp; Insights</div>
+    <div class="ftag">Automation Specialist — Monitoring &amp; Optimisation</div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section class="s bg-linen" id="overview">
+  <div class="eyebrow">Programme Overview</div>
+  <h2 class="sh reveal">One programme. The <em>full data workflow</em> — end to end.</h2>
+  <p class="sp reveal">From raw spreadsheets to automated executive dashboards. This programme covers every layer of the analytics lifecycle using platforms that organisations rely on daily.</p>
+  <div class="ov-grid reveal">
+    <div class="ov-main">
+      <div class="ov-eye">Programme Focus</div>
+      <div class="ov-h">Turning organisational data into actionable insights, dashboards, and KPIs.</div>
+      <div class="ov-p">Using no-code and low-code tools, learners develop the full skill set to gather, clean, model, visualise, and automate data workflows — and present findings that move organisations forward.</div>
+    </div>
+    <div class="ov-col">
+      <div class="ov-ch">Primary Tools</div>
+      <ul class="ov-list">
+        <li>Power BI</li><li>Google Looker Studio</li><li>Airtable</li>
+        <li>Excel (Advanced)</li><li>Google Sheets</li>
+      </ul>
+    </div>
+    <div class="ov-col">
+      <div class="ov-ch">Target Roles</div>
+      <ul class="ov-list">
+        <li>Business Data Analyst</li><li>BI Analyst (Junior–Mid)</li>
+        <li>Operations Analyst</li><li>Reporting Specialist</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="s" id="curriculum" style="background:var(--parchment);">
+  <div class="eyebrow">Curriculum</div>
+  <h2 class="sh reveal">Six stackable courses. <em>Employable</em> at every level.</h2>
+  <p class="sp reveal">Each course ends with a recognised exit role. You can enter the workforce before the programme is complete — and keep building from there.</p>
+  <div class="ctable reveal">
+
+    <div class="cr">
+      <div class="cn">C·01</div>
+      <div class="cb">
+        <div class="ct">Data Fundamentals &amp; Business Metrics</div>
+        <div class="cd">Build your foundation in data types, KPIs, cleaning, and the tools that analysts use every day. Get hands-on with Excel and Google Sheets from session one.</div>
+        <div class="chips"><span class="chip">Structured vs Unstructured</span><span class="chip">Business KPIs</span><span class="chip">Data Cleaning</span><span class="chip">Excel &amp; Sheets</span></div>
+      </div>
+      <div class="cm"><div class="cdur">2–3 Weeks</div><div class="eb"><div class="el">Exit Role</div><div class="er">Junior Data Analyst / Reporting Assistant</div></div></div>
+    </div>
+
+    <div class="cr">
+      <div class="cn">C·02</div>
+      <div class="cb">
+        <div class="ct">Data Analysis &amp; Visualisation Basics</div>
+        <div class="cd">Translate numbers into insight. Design your first dashboards using Looker Studio and Power BI, and learn to communicate data to non-technical stakeholders.</div>
+        <div class="chips"><span class="chip">Charts &amp; Graphs</span><span class="chip">Pivot Tables</span><span class="chip">Conditional Formatting</span><span class="chip">Power BI &amp; Looker Studio</span></div>
+      </div>
+      <div class="cm"><div class="cdur">3 Weeks</div><div class="eb"><div class="el">Exit Role</div><div class="er">Data Visualisation Specialist</div></div></div>
+    </div>
+
+    <div class="cr">
+      <div class="cn">C·03</div>
+      <div class="cb">
+        <div class="ct">Intermediate BI &amp; Dashboard Development</div>
+        <div class="cd">Move into interactive, multi-source dashboards. Build department-level KPI trackers and drill-down reports that decision-makers actually use.</div>
+        <div class="chips"><span class="chip">Data Modeling</span><span class="chip">Interactive Filters &amp; Slicers</span><span class="chip">Multi-Source Dashboards</span><span class="chip">Drill-Down Reporting</span></div>
+      </div>
+      <div class="cm"><div class="cdur">3 Weeks</div><div class="eb"><div class="el">Exit Role</div><div class="er">BI Analyst (Intermediate)</div></div></div>
+    </div>
+
+    <div class="cr">
+      <div class="cn">C·04</div>
+      <div class="cb">
+        <div class="ct">Data Cleaning, Transformation &amp; Automation</div>
+        <div class="cd">Eliminate manual effort. Automate data pipelines from Excel through Airtable into BI tools — and connect Zapier or Make to generate recurring reports automatically.</div>
+        <div class="chips"><span class="chip">Transformation Techniques</span><span class="chip">Automated Imports/Exports</span><span class="chip">Formula Automation</span><span class="chip">Zapier / Make</span></div>
+      </div>
+      <div class="cm"><div class="cdur">4 Weeks</div><div class="eb"><div class="el">Exit Role</div><div class="er">Data Operations Analyst</div></div></div>
+    </div>
+
+    <div class="cr">
+      <div class="cn">C·05</div>
+      <div class="cb">
+        <div class="ct">Advanced Analytics &amp; Business Insights</div>
+        <div class="cd">Go beyond reporting into strategy. Perform trend analysis, forecasting, and cohort segmentation — and present evidence-backed recommendations to senior stakeholders.</div>
+        <div class="chips"><span class="chip">Trend Analysis &amp; Forecasting</span><span class="chip">KPI Benchmarking</span><span class="chip">Cohort Analysis</span><span class="chip">Advanced Power BI</span></div>
+      </div>
+      <div class="cm"><div class="cdur">3 Weeks</div><div class="eb"><div class="el">Exit Role</div><div class="er">Business Insights Analyst</div></div></div>
+    </div>
+
+    <div class="cr fin">
+      <div class="cn">C·06</div>
+      <div class="cb">
+        <div class="ct">Portfolio, Reporting Automation &amp; Career Launch</div>
+        <div class="cd">Deploy a fully automated, enterprise-ready BI solution. Build your professional portfolio, prepare for interviews, and launch your career in data analytics or consulting.</div>
+        <div class="chips"><span class="chip">Portfolio Development</span><span class="chip">Executive Storytelling</span><span class="chip">KPI Monitoring &amp; Alerts</span><span class="chip">Career Readiness</span><span class="chip">Freelance Models</span></div>
+      </div>
+      <div class="cm"><div class="cdur">2–3 Weeks</div><div class="eb"><div class="el">Final Certification</div><div class="er">Professional Data Analytics &amp; BI Specialist</div></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="s bg-linen" id="tools">
+  <div class="eyebrow">Industry Platforms</div>
+  <h2 class="sh reveal">The <em>exact tools</em> that organisations run on.</h2>
+  <p class="sp reveal">Every platform is taught hands-on. Graduate with a working portfolio built in industry-standard software — not toy exercises.</p>
+  <div class="tgrid reveal">
+    <div class="tc"><div class="ti">📊</div><div class="tn">Power BI</div><div class="td">Microsoft's enterprise BI platform for interactive, scalable reports used across global organisations.</div></div>
+    <div class="tc"><div class="ti">🔍</div><div class="tn">Google Looker Studio</div><div class="td">Cloud-native visualisation that connects to live data for shareable, always-current dashboards.</div></div>
+    <div class="tc"><div class="ti">🗄️</div><div class="tn">Airtable</div><div class="td">Flexible no-code database bridging spreadsheets and BI systems — with built-in automation.</div></div>
+    <div class="tc"><div class="ti">📈</div><div class="tn">Excel (Advanced)</div><div class="td">Advanced formulas, pivot analysis, and automated reporting — the analyst's most versatile tool.</div></div>
+    <div class="tc"><div class="ti">📋</div><div class="tn">Google Sheets</div><div class="td">Collaborative real-time data management and live reporting for modern distributed teams.</div></div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="s" id="outcomes" style="background:var(--parchment);">
+  <div class="eyebrow">Graduate Outcomes</div>
+  <h2 class="sh reveal">Ready to work. <em>Day one.</em></h2>
+  <p class="sp reveal">The Course 6 capstone produces a fully certified specialist — with a live portfolio, real projects, and the confidence to lead data operations independently.</p>
+  <div class="ol reveal">
+    <div class="op">
+      <div class="op-e">Programme Exit Outcome — Course 6</div>
+      <div class="op-t">Certified Data Analytics &amp; BI Specialist</div>
+      <ul class="opl">
+        <li>Gather, clean, and analyse organisational data from multiple sources</li>
+        <li>Design professional dashboards and executive-ready reports in Power BI and Looker Studio</li>
+        <li>Extract actionable insights that directly inform business decision-making</li>
+        <li>Automate recurring analytics and reporting tasks end-to-end</li>
+        <li>Build and present a client-ready, production-quality analytics portfolio</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Career Roles</p>
+      <div class="rl">
+        <div class="ri"><div class="rn">Business Data Analyst</div><div class="rb">Finance · Ops</div></div>
+        <div class="ri"><div class="rn">BI Analyst (Junior–Mid)</div><div class="rb">Enterprise · Tech</div></div>
+        <div class="ri"><div class="rn">Operations Analyst</div><div class="rb">Logistics · Retail</div></div>
+        <div class="ri"><div class="rn">Reporting Specialist</div><div class="rb">NGOs · Corporate</div></div>
+        <div class="ri"><div class="rn">BI Consultant (Freelance)</div><div class="rb">SMEs · Agencies</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATION -->
+<section class="s bg-linen">
+  <div class="eyebrow">Certification</div>
+  <h2 class="sh reveal"><em>Stackable</em> credentials — earned at every stage.</h2>
+  <p class="sp reveal">Receive a certificate per course, accumulate recognised badges, and graduate with a full professional certification upon completing Course 6.</p>
+  <div class="cgrid reveal">
+    <div class="cc"><div class="ccn">01</div><div class="ccname">Data Analyst (Junior)</div><div class="ccd">Awarded upon completing data fundamentals and KPI analysis in Courses 1–2.</div></div>
+    <div class="cc"><div class="ccn">02</div><div class="ccname">BI Analyst (Intermediate)</div><div class="ccd">Awarded after building interactive, multi-source dashboards in Courses 3–4.</div></div>
+    <div class="cc"><div class="ccn">03</div><div class="ccname">Dashboard Developer</div><div class="ccd">Recognises advanced proficiency in Power BI and Looker Studio dashboard builds.</div></div>
+    <div class="cc"><div class="ccn">04</div><div class="ccname">Reporting &amp; Automation Specialist</div><div class="ccd">Full professional certification awarded on completion of the Course 6 capstone.</div></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="s why-bg">
+  <div class="wi">
+    <div>
+      <div class="eyebrow" style="color:var(--gold-light);">Why This Programme</div>
+      <h2 class="wt">Data skills that <em>don't wait</em> for a developer.</h2>
+      <p class="ws">BI and analytics roles are among the fastest-growing globally. This is the most direct no-code path into that demand — for professionals who already understand the business.</p>
+    </div>
+    <ul class="wlist reveal">
+      <li class="wr"><div class="wc">✓</div><div class="wtx"><strong>High global demand</strong> for BI &amp; analytics professionals across finance, operations, tech, and the public sector</div></li>
+      <li class="wr"><div class="wc">✓</div><div class="wtx"><strong>No coding required</strong> — a direct pathway into data-driven decision-making for non-technical professionals</div></li>
+      <li class="wr"><div class="wc">✓</div><div class="wtx"><strong>Stackable with GRC, Product, and Automation</strong> tracks for complete digital professional competency</div></li>
+      <li class="wr"><div class="wc">✓</div><div class="wtx"><strong>Enterprise-applicable</strong> — skills that translate directly to SMEs, corporates, NGOs, and consulting</div></li>
+      <li class="wr"><div class="wc">✓</div><div class="wtx"><strong>Portfolio-based learning</strong> — graduate with six real projects, not just theory and certificates</div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="s bg-parch" id="apply">
+  <div class="cta-w reveal">
+    <div>
+      <div class="cta-h">Start turning data into <em>your competitive edge.</em></div>
+      <p class="cta-p">Join the 2026/2027 cohort and build the analytics skills that organisations are hiring for right now — no coding background needed.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="https://form.jotform.com/260541505232042" target="_blank" class="btn-cp">Apply Now</a>
+      <a href="#curriculum" class="btn-co">View Curriculum</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fb">Data Analytics &amp; <span>Business Intelligence</span></div>
+  <div class="fm">6 Courses · Stackable · No-Code / Low-Code<br>Programme Prospectus · 2026 / 2027</div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e, i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('shown'), i*90); });
+  }, {threshold:0.07});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 56;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
