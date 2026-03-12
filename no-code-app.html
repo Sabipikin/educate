@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No-Code App Development Program | Sabi-Educate</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Chivo+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Raleway:ital,wght@0,300;0,400;0,600;1,700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════
+   TOKENS
+══════════════════════════════════ */
+:root{
+  --void:     #04050D;
+  --deep:     #070919;
+  --surface:  #0B0E22;
+  --card:     #0E1228;
+  --card2:    #12172E;
+  --violet:   #6C3FFF;
+  --violet-lt:#8B62FF;
+  --pink:     #FF3FD4;
+  --pink-lt:  #FF70E0;
+  --lime:     #A8FF3E;
+  --lime-lt:  #C8FF70;
+  --white:    #F0EEFF;
+  --text:     #8A90B8;
+  --muted:    #3A3F62;
+  --border:   rgba(255,255,255,0.05);
+  --border2:  rgba(108,63,255,0.25);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--void);
+  color:var(--text);
+  font-family:'Raleway',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* grain overlay */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.025'/%3E%3C/svg%3E");
+  opacity:0.6;
+}
+
+/* ══════════════════════
+   NAV
+══════════════════════ */
+.nav{
+  position:sticky;top:0;z-index:500;
+  height:56px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 60px;
+  background:rgba(4,5,13,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;font-size:18px;color:var(--white);
+  letter-spacing:-0.02em;display:flex;align-items:center;gap:10px;
+}
+.logo-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--lime);
+  box-shadow:0 0 12px var(--lime);
+  animation:glow 2s ease-in-out infinite;
+}
+@keyframes glow{0%,100%{box-shadow:0 0 8px var(--lime);}50%{box-shadow:0 0 20px var(--lime),0 0 40px rgba(168,255,62,0.3);}}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{
+  font-family:'Chivo Mono',monospace;
+  font-size:10px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--lime);}
+.nav-enrol{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;font-size:12px;letter-spacing:0.05em;
+  text-transform:uppercase;text-decoration:none;
+  color:var(--void);background:var(--lime);
+  padding:9px 22px;
+  transition:box-shadow 0.25s,transform 0.2s;
+}
+.nav-enrol:hover{box-shadow:0 0 24px rgba(168,255,62,0.5);transform:translateY(-1px);}
+
+/* ══════════════════════
+   HERO
+══════════════════════ */
+.hero{
+  position:relative;min-height:100vh;
+  padding:100px 60px 80px;
+  display:flex;flex-direction:column;
+  justify-content:center;overflow:hidden;
+}
+
+/* background mesh */
+.hero-mesh{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(108,63,255,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 15% 70%, rgba(255,63,212,0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 30% at 60% 85%, rgba(168,255,62,0.07) 0%, transparent 70%);
+}
+/* animated grid */
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(108,63,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108,63,255,0.07) 1px, transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+}
+
+/* floating code badge */
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(108,63,255,0.1);
+  border:1px solid rgba(108,63,255,0.3);
+  padding:8px 18px;width:fit-content;
+  margin-bottom:36px;
+  animation:fadeUp 0.6s ease both;
+}
+.badge-dot{width:6px;height:6px;background:var(--lime);border-radius:50%;box-shadow:0 0 6px var(--lime);}
+.badge-text{
+  font-family:'Chivo Mono',monospace;
+  font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--violet-lt);
+}
+
+.hero-title{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;
+  font-size:clamp(48px,8.5vw,116px);
+  line-height:0.88;
+  letter-spacing:-0.03em;
+  max-width:1000px;
+  animation:fadeUp 0.6s 0.1s ease both;
+}
+.ht-dim{color:var(--muted);}
+.ht-white{color:var(--white);}
+.ht-grad{
+  background:linear-gradient(135deg, var(--violet-lt) 0%, var(--pink) 50%, var(--lime) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.hero-sub{
+  max-width:560px;font-size:16px;color:var(--text);line-height:1.8;
+  margin-top:28px;
+  animation:fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-actions{
+  display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;
+  animation:fadeUp 0.6s 0.3s ease both;
+}
+.btn-lime{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;
+  background:var(--lime);color:var(--void);
+  padding:15px 36px;text-decoration:none;display:inline-block;
+  transition:box-shadow 0.25s,transform 0.2s;
+}
+.btn-lime:hover{box-shadow:0 0 36px rgba(168,255,62,0.45);transform:translateY(-2px);}
+.btn-outline{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;
+  background:transparent;color:var(--white);
+  padding:14px 36px;border:1px solid var(--border2);
+  text-decoration:none;display:inline-block;
+  transition:border-color 0.2s,color 0.2s;
+}
+.btn-outline:hover{border-color:var(--violet-lt);color:var(--violet-lt);}
+
+/* stat strip */
+.hero-statbar{
+  margin-top:80px;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  border:1px solid var(--border);
+  background:rgba(11,14,34,0.6);
+  animation:fadeUp 0.6s 0.4s ease both;
+}
+.hs{padding:22px 28px;border-right:1px solid var(--border);}
+.hs:last-child{border-right:none;}
+.hs-n{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;font-size:38px;color:var(--white);
+  line-height:1;letter-spacing:-0.02em;
+}
+.hs-n sub{font-size:16px;color:var(--lime);vertical-align:bottom;font-weight:700;}
+.hs-l{
+  font-family:'Chivo Mono',monospace;
+  font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);margin-top:5px;
+}
+
+/* ══════════════════════
+   SHARED
+══════════════════════ */
+.sec{padding:100px 60px;position:relative;}
+.sec-dark{background:var(--deep);}
+.sec-surface{background:var(--surface);}
+
+.eyebrow{
+  font-family:'Chivo Mono',monospace;
+  font-size:9px;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--violet-lt);display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
+}
+.eyebrow::before{content:'[ ';color:var(--muted);}
+.eyebrow::after{content:' ]';color:var(--muted);}
+
+.sec-h{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;
+  font-size:clamp(30px,4.5vw,60px);
+  color:var(--white);line-height:0.95;
+  letter-spacing:-0.03em;max-width:720px;margin-bottom:16px;
+}
+.sec-h em{
+  font-style:italic;font-weight:700;
+  color:transparent;
+  -webkit-text-stroke:1px var(--violet-lt);
+}
+.sec-p{font-size:15px;color:var(--text);max-width:560px;margin-bottom:60px;line-height:1.8;}
+
+/* ══════════════════════
+   DELIVERY MODES
+══════════════════════ */
+.modes-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--border);border:1px solid var(--border);
+}
+.mode-card{
+  background:var(--card);padding:52px 48px;
+  position:relative;overflow:hidden;
+  transition:background 0.3s;
+}
+.mode-card:hover{background:var(--card2);}
+
+/* glowing top edge */
+.mode-card.live::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg, var(--violet), var(--pink));
+}
+.mode-card.self::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg, var(--lime), var(--violet));
+}
+
+.mode-icon{
+  width:56px;height:56px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin-bottom:24px;
+  border:1px solid var(--border2);
+  background:rgba(108,63,255,0.07);
+}
+.mode-label{
+  font-family:'Chivo Mono',monospace;
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--violet-lt);margin-bottom:12px;
+}
+.mode-title{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;font-size:28px;color:var(--white);
+  letter-spacing:-0.02em;margin-bottom:20px;line-height:1.05;
+}
+.mode-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;}
+.mode-features li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-size:14px;color:var(--text);line-height:1.5;
+}
+.mode-features li::before{
+  content:'→';font-family:'Chivo Mono',monospace;
+  font-size:12px;flex-shrink:0;margin-top:1px;
+}
+.mode-card.live .mode-features li::before{color:var(--pink-lt);}
+.mode-card.self .mode-features li::before{color:var(--lime);}
+
+.mode-detail{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  padding:16px 20px;
+  font-family:'Chivo Mono',monospace;
+  font-size:11px;color:var(--muted);line-height:1.7;
+}
+.mode-detail strong{color:var(--white);font-weight:500;}
+
+/* ══════════════════════
+   COURSES
+══════════════════════ */
+.course-stack{display:flex;flex-direction:column;gap:1px;background:var(--border);}
+
+.c-card{
+  background:var(--card);
+  display:grid;grid-template-columns:72px 1fr 240px;
+  min-height:120px;border-bottom:1px solid var(--border);
+  transition:background 0.25s;
+  position:relative;overflow:hidden;
+}
+.c-card:last-child{border-bottom:none;}
+.c-card:hover{background:var(--card2);}
+
+/* accent left bar on hover */
+.c-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom, var(--violet), var(--pink));
+  transform:scaleY(0);transform-origin:top;transition:transform 0.3s;
+}
+.c-card:hover::before{transform:scaleY(1);}
+
+.c-num{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;
+  border-right:1px solid var(--border);
+  gap:6px;padding:16px 0;
+  background:rgba(108,63,255,0.04);
+}
+.c-num-n{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;font-size:28px;color:rgba(108,63,255,0.25);
+  line-height:1;transition:color 0.3s;
+}
+.c-card:hover .c-num-n{color:rgba(139,98,255,0.5);}
+.c-num-l{
+  font-family:'Chivo Mono',monospace;
+  font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);
+}
+
+.c-body{padding:22px 30px;border-right:1px solid var(--border);}
+.c-title{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;font-size:17px;color:var(--white);
+  letter-spacing:-0.01em;margin-bottom:6px;line-height:1.25;
+}
+.c-desc{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:14px;}
+.c-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.c-chip{
+  font-family:'Chivo Mono',monospace;
+  font-size:9px;letter-spacing:0.05em;
+  color:var(--violet-lt);
+  background:rgba(108,63,255,0.08);
+  border:1px solid rgba(108,63,255,0.2);
+  padding:3px 9px;
+}
+
+.c-meta{padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;}
+.c-dur{
+  font-family:'Chivo Mono',monospace;
+  font-size:9px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:6px;
+}
+.c-dur::before{content:'◷';font-size:12px;}
+.c-exit{
+  border:1px solid rgba(168,255,62,0.15);
+  background:rgba(168,255,62,0.04);
+  padding:10px 14px;
+}
+.c-exit-l{
+  font-family:'Chivo Mono',monospace;
+  font-size:8px;letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(168,255,62,0.5);margin-bottom:4px;
+}
+.c-exit-r{font-size:11px;font-weight:600;color:var(--lime-lt);line-height:1.4;}
+
+/* final course highlight */
+.c-card.final{background:var(--surface);}
+.c-card.final:hover{background:var(--card2);}
+.c-card.final .c-title{color:var(--lime);}
+.c-card.final .c-num-n{color:rgba(168,255,62,0.2);}
+.c-card.final:hover .c-num-n{color:rgba(168,255,62,0.4);}
+.c-card.final::before{background:linear-gradient(to bottom, var(--lime), var(--violet));}
+
+/* ══════════════════════
+   WHAT YOU BUILD — PROJECTS
+══════════════════════ */
+.projects-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+}
+.proj-card{
+  background:var(--card);padding:36px 30px;
+  position:relative;overflow:hidden;
+  transition:background 0.3s,transform 0.3s;
+}
+.proj-card:hover{background:var(--card2);transform:translateY(-3px);z-index:1;box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+.proj-num{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;font-size:52px;color:rgba(108,63,255,0.08);
+  line-height:1;margin-bottom:12px;transition:color 0.3s;
+}
+.proj-card:hover .proj-num{color:rgba(108,63,255,0.18);}
+.proj-title{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;font-size:15px;color:var(--white);
+  margin-bottom:8px;line-height:1.3;
+}
+.proj-desc{font-size:12px;color:var(--muted);line-height:1.65;}
+.proj-tag{
+  display:inline-block;margin-top:14px;
+  font-family:'Chivo Mono',monospace;
+  font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--pink-lt);background:rgba(255,63,212,0.07);
+  border:1px solid rgba(255,63,212,0.18);padding:3px 10px;
+}
+
+/* ══════════════════════
+   PRICING
+══════════════════════ */
+.pricing-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;
+  max-width:900px;margin:0 auto;
+}
+.price-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:48px 44px;position:relative;overflow:hidden;
+  transition:transform 0.3s;
+}
+.price-card:hover{transform:translateY(-4px);}
+.price-card.hot{
+  border-color:var(--lime);
+  background:linear-gradient(160deg, var(--card2) 0%, rgba(168,255,62,0.03) 100%);
+}
+.price-card.hot:hover{box-shadow:0 0 48px rgba(168,255,62,0.12);}
+.hot-badge{
+  position:absolute;top:20px;right:20px;
+  font-family:'Chivo Mono',monospace;
+  font-size:8px;letter-spacing:0.15em;text-transform:uppercase;
+  background:var(--lime);color:var(--void);
+  padding:4px 10px;font-weight:700;
+}
+.price-mode{
+  font-family:'Chivo Mono',monospace;
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:18px;
+}
+.price-amount{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;font-size:72px;color:var(--white);
+  line-height:1;letter-spacing:-0.03em;margin-bottom:6px;
+}
+.price-amount span{font-size:28px;color:var(--violet-lt);}
+.price-sub{font-size:12px;color:var(--muted);margin-bottom:28px;}
+.p-divider{height:1px;background:var(--border);margin:24px 0;}
+.p-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.p-list li{
+  display:flex;gap:12px;font-size:13px;color:var(--text);
+  align-items:flex-start;line-height:1.5;
+}
+.p-list li .chk{
+  width:16px;height:16px;flex-shrink:0;margin-top:1px;
+  border-radius:50%;border:1px solid var(--violet-lt);
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;color:var(--violet-lt);
+}
+.price-card.hot .p-list li .chk{border-color:var(--lime);color:var(--lime);}
+.p-btn{
+  display:block;text-align:center;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;
+  padding:15px;margin-top:32px;text-decoration:none;
+  transition:all 0.25s;
+}
+.p-btn-outline{border:1px solid var(--border2);color:var(--violet-lt);}
+.p-btn-outline:hover{border-color:var(--violet-lt);background:rgba(108,63,255,0.08);}
+.p-btn-solid{background:var(--lime);color:var(--void);}
+.p-btn-solid:hover{box-shadow:0 0 32px rgba(168,255,62,0.4);}
+
+/* ══════════════════════
+   TOOLS MARQUEE
+══════════════════════ */
+.tools-strip{
+  padding:40px 0;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;position:relative;
+}
+.tools-strip::before,.tools-strip::after{
+  content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;
+}
+.tools-strip::before{left:0;background:linear-gradient(90deg,var(--surface),transparent);}
+.tools-strip::after{right:0;background:linear-gradient(270deg,var(--surface),transparent);}
+.marquee-track{display:flex;gap:12px;animation:marquee 24s linear infinite;width:max-content;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.tool-pill{
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--border);
+  padding:12px 24px;white-space:nowrap;flex-shrink:0;
+}
+.tool-emoji{font-size:18px;}
+.tool-name{
+  font-family:'Chivo Mono',monospace;
+  font-size:11px;letter-spacing:0.06em;color:var(--text);
+}
+
+/* ══════════════════════
+   OUTCOMES
+══════════════════════ */
+.outcomes-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:start;
+}
+.outcome-panel{
+  background:var(--card);
+  border:1px solid var(--border2);
+  padding:48px 44px;position:relative;overflow:hidden;
+}
+.outcome-panel::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--violet),var(--pink),var(--lime));
+}
+.op-label{
+  font-family:'Chivo Mono',monospace;
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--violet-lt);margin-bottom:18px;
+}
+.op-title{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;font-size:22px;color:var(--white);
+  letter-spacing:-0.02em;margin-bottom:24px;line-height:1.15;
+}
+.op-list{list-style:none;display:flex;flex-direction:column;gap:14px;}
+.op-list li{
+  display:flex;gap:12px;font-size:13px;color:var(--text);line-height:1.65;
+}
+.op-list li::before{
+  content:'//';font-family:'Chivo Mono',monospace;
+  font-size:10px;color:var(--violet-lt);flex-shrink:0;margin-top:2px;
+}
+
+.roles-col{display:flex;flex-direction:column;gap:1px;background:var(--border);}
+.role-row{
+  background:var(--card);padding:20px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  transition:background 0.2s,padding-left 0.25s;
+}
+.role-row:hover{background:var(--card2);padding-left:32px;}
+.role-name{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;font-size:14px;color:var(--white);
+}
+.role-tag{
+  font-family:'Chivo Mono',monospace;
+  font-size:9px;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--pink-lt);background:rgba(255,63,212,0.07);
+  border:1px solid rgba(255,63,212,0.18);padding:3px 10px;white-space:nowrap;
+}
+
+/* ══════════════════════
+   WHY
+══════════════════════ */
+.why-bg{
+  background:linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.why-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.why-title{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;font-size:clamp(34px,5vw,60px);
+  color:var(--white);letter-spacing:-0.03em;line-height:0.92;
+}
+.why-title .pop{
+  background:linear-gradient(90deg, var(--lime), var(--violet-lt));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.why-sub{font-size:14px;color:var(--text);margin-top:18px;line-height:1.8;max-width:380px;}
+.why-cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.wc{background:var(--card);padding:28px 24px;transition:background 0.25s;}
+.wc:hover{background:var(--card2);}
+.wc-icon{font-size:26px;margin-bottom:14px;}
+.wc-title{font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:14px;color:var(--white);margin-bottom:6px;}
+.wc-text{font-size:12px;color:var(--muted);line-height:1.65;}
+
+/* ══════════════════════
+   CTA
+══════════════════════ */
+.cta-sec{
+  position:relative;overflow:hidden;
+  background:var(--void);
+  text-align:center;padding:130px 60px;
+}
+.cta-burst{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:700px;height:700px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(108,63,255,0.12) 0%, transparent 50%),
+    radial-gradient(circle at 30% 30%, rgba(255,63,212,0.06) 0%, transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(168,255,62,0.06) 0%, transparent 60%);
+  pointer-events:none;
+}
+.cta-tag{
+  font-family:'Chivo Mono',monospace;
+  font-size:10px;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--lime);margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.cta-tag::before,.cta-tag::after{content:'—';color:var(--muted);}
+.cta-h{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;
+  font-size:clamp(44px,7vw,90px);
+  color:var(--white);letter-spacing:-0.03em;
+  line-height:0.9;max-width:800px;margin:0 auto 20px;
+}
+.cta-h .gr{
+  background:linear-gradient(135deg, var(--violet-lt), var(--pink), var(--lime));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.cta-sub{
+  font-size:15px;color:var(--text);
+  max-width:460px;margin:0 auto 48px;line-height:1.8;
+}
+.cta-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
+
+/* ══════════════════════
+   FOOTER
+══════════════════════ */
+footer{
+  background:var(--deep);
+  border-top:1px solid var(--border);
+  padding:32px 60px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:16px;
+}
+.f-brand{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:900;font-size:18px;color:var(--white);
+  letter-spacing:-0.02em;
+}
+.f-brand span{color:var(--lime);}
+.f-meta{
+  font-family:'Chivo Mono',monospace;
+  font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);text-align:right;line-height:1.9;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.on{opacity:1;transform:none;}
+
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .hero,.sec,.cta-sec{padding:60px 24px;}
+  .hero-statbar{grid-template-columns:repeat(2,1fr);}
+  .modes-grid,.outcomes-grid,.why-inner,.why-cards,.pricing-wrap{grid-template-columns:1fr;}
+  .projects-grid{grid-template-columns:1fr;}
+  .c-card{grid-template-columns:56px 1fr;}
+  .c-meta{display:none;}
+  footer{padding:24px;}
+  .nav{padding:0 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo"><div class="logo-dot"></div>Sabi-Educate</div>
+  <div class="nav-links">
+    <a href="#modes">Training Modes</a>
+    <a href="#courses">Curriculum</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#outcomes">Outcomes</a>
+    <a href="#enrol">Enrol</a>
+  </div>
+  <a href="https://form.jotform.com/260541505232042" target="_blank" class="nav-enrol">Apply Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    <div class="badge-text">Programme Prospectus · 2026 / 2027 · Now Enrolling</div>
+  </div>
+
+  <h1 class="hero-title">
+    <span class="ht-dim">Build</span><br>
+    <span class="ht-white">Real Apps.</span><br>
+    <span class="ht-grad">Zero Code.</span>
+  </h1>
+
+  <p class="hero-sub">
+    The No-Code App Development Program equips you with the skills to design, build, and launch production-ready digital products — without writing a single line of code.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://form.jotform.com/260541505232042" target="_blank" class="btn-lime">Start Building →</a>
+    <a href="#courses" class="btn-outline">Explore Curriculum</a>
+  </div>
+
+  <div class="hero-statbar">
+    <div class="hs"><div class="hs-n">6<sub>courses</sub></div><div class="hs-l">Stackable</div></div>
+    <div class="hs"><div class="hs-n">6<sub>+</sub></div><div class="hs-l">Exit Roles</div></div>
+    <div class="hs"><div class="hs-n">0</div><div class="hs-l">Code Required</div></div>
+    <div class="hs"><div class="hs-n">£<sub style="color:var(--violet-lt);font-size:20px;">250</sub></div><div class="hs-l">Starting From</div></div>
+    <div class="hs"><div class="hs-n">2<sub>modes</sub></div><div class="hs-l">Training Options</div></div>
+  </div>
+</section>
+
+<!-- TOOLS MARQUEE -->
+<div class="tools-strip">
+  <div class="marquee-track">
+    <div class="tool-pill"><div class="tool-emoji">⚡</div><div class="tool-name">Bubble</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🌊</div><div class="tool-name">Webflow</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🔀</div><div class="tool-name">Zapier</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🔧</div><div class="tool-name">Make</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🏗️</div><div class="tool-name">Xano</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🗄️</div><div class="tool-name">Supabase</div></div>
+    <div class="tool-pill"><div class="tool-emoji">💳</div><div class="tool-name">Stripe</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🤖</div><div class="tool-name">OpenAI API</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🔗</div><div class="tool-name">REST APIs</div></div>
+    <div class="tool-pill"><div class="tool-emoji">📊</div><div class="tool-name">Airtable</div></div>
+    <!-- duplicated for loop -->
+    <div class="tool-pill"><div class="tool-emoji">⚡</div><div class="tool-name">Bubble</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🌊</div><div class="tool-name">Webflow</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🔀</div><div class="tool-name">Zapier</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🔧</div><div class="tool-name">Make</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🏗️</div><div class="tool-name">Xano</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🗄️</div><div class="tool-name">Supabase</div></div>
+    <div class="tool-pill"><div class="tool-emoji">💳</div><div class="tool-name">Stripe</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🤖</div><div class="tool-name">OpenAI API</div></div>
+    <div class="tool-pill"><div class="tool-emoji">🔗</div><div class="tool-name">REST APIs</div></div>
+    <div class="tool-pill"><div class="tool-emoji">📊</div><div class="tool-name">Airtable</div></div>
+  </div>
+</div>
+
+<!-- DELIVERY MODES -->
+<section class="sec sec-dark" id="modes">
+  <div class="eyebrow">Training Modes</div>
+  <h2 class="sec-h reveal">Two paths. <em>One destination.</em></h2>
+  <p class="sec-p reveal">Choose the learning format that fits your life. Both modes deliver the same full curriculum, the same certification, and the same career outcomes.</p>
+
+  <div class="modes-grid reveal">
+    <div class="mode-card live">
+      <div class="mode-icon">🎯</div>
+      <div class="mode-label">Mode 01</div>
+      <div class="mode-title">Live Instructor-Led Learning</div>
+      <ul class="mode-features">
+        <li>Real-time interaction with expert instructors</li>
+        <li>Structured, week-by-week learning path</li>
+        <li>Collaborative sessions with fellow builders</li>
+        <li>Immediate feedback on your projects and builds</li>
+        <li>Certification preparation &amp; guided exam readiness</li>
+        <li>Mentorship-driven growth &amp; career coaching</li>
+      </ul>
+      <div class="mode-detail">
+        <strong>Schedule:</strong> 2 live sessions per week<br>
+        <strong>Session length:</strong> 2 hours per session<br>
+        <strong>Format:</strong> Instructor-led · Interactive · Collaborative
+      </div>
+    </div>
+
+    <div class="mode-card self">
+      <div class="mode-icon">🚀</div>
+      <div class="mode-label">Mode 02</div>
+      <div class="mode-title">Self-Paced Learning</div>
+      <ul class="mode-features">
+        <li>Learn through high-quality video lessons &amp; class notes</li>
+        <li>Fully flexible — learn anytime, anywhere, on any device</li>
+        <li>Complete control over your learning speed and schedule</li>
+        <li>Templates, worksheets &amp; guided project submissions</li>
+        <li>Certificate awarded on completion of each course</li>
+        <li>Lifetime access to all course materials</li>
+      </ul>
+      <div class="mode-detail">
+        <strong>Schedule:</strong> Entirely your own<br>
+        <strong>Format:</strong> Video-led · Self-directed · Flexible<br>
+        <strong>Access:</strong> Learn anytime · Anywhere
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="sec" id="courses" style="background:var(--void);">
+  <div class="eyebrow">Curriculum</div>
+  <h2 class="sec-h reveal">Six courses. <em>Stackable.</em> Deployable.</h2>
+  <p class="sec-p reveal">Every course delivers a standalone marketable skill and an exit role. Stack them all to become a fully independent no-code professional.</p>
+
+  <div class="course-stack reveal">
+
+    <div class="c-card">
+      <div class="c-num"><div class="c-num-n">01</div><div class="c-num-l">Course</div></div>
+      <div class="c-body">
+        <div class="c-title">No-Code Foundations &amp; Product Thinking</div>
+        <div class="c-desc">App mechanics, no-code mindset, user flows, MVP scoping, wireframing, UX/UI basics, and your first functional Bubble prototype.</div>
+        <div class="c-chips">
+          <span class="c-chip">App Architecture</span>
+          <span class="c-chip">User Flows &amp; Wireframing</span>
+          <span class="c-chip">UX/UI Principles</span>
+          <span class="c-chip">Bubble Intro</span>
+          <span class="c-chip">MVP Scoping</span>
+        </div>
+      </div>
+      <div class="c-meta">
+        <div class="c-dur">2–3 Weeks</div>
+        <div class="c-exit"><div class="c-exit-l">Exit Role</div><div class="c-exit-r">No-Code Junior Builder / App Assistant</div></div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-num"><div class="c-num-n">02</div><div class="c-num-l">Course</div></div>
+      <div class="c-body">
+        <div class="c-title">Bubble Core Development (Web Apps)</div>
+        <div class="c-desc">Build complete, responsive web apps — responsive layouts, database design, CRUD operations, workflows, user auth, and deployment.</div>
+        <div class="c-chips">
+          <span class="c-chip">Database Design</span>
+          <span class="c-chip">CRUD Operations</span>
+          <span class="c-chip">Workflows &amp; Logic</span>
+          <span class="c-chip">User Authentication</span>
+          <span class="c-chip">Deployment</span>
+        </div>
+      </div>
+      <div class="c-meta">
+        <div class="c-dur">4 Weeks</div>
+        <div class="c-exit"><div class="c-exit-l">Exit Role</div><div class="c-exit-r">Bubble Web App Developer</div></div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-num"><div class="c-num-n">03</div><div class="c-num-l">Course</div></div>
+      <div class="c-body">
+        <div class="c-title">Frontend &amp; CMS with Webflow</div>
+        <div class="c-desc">Create professional, CMS-driven, responsive sites with animations, interactions, SEO — connected to a Bubble backend.</div>
+        <div class="c-chips">
+          <span class="c-chip">Webflow Layouts</span>
+          <span class="c-chip">CMS &amp; Dynamic Content</span>
+          <span class="c-chip">Interactions &amp; Animations</span>
+          <span class="c-chip">SEO Fundamentals</span>
+          <span class="c-chip">Bubble Integration</span>
+        </div>
+      </div>
+      <div class="c-meta">
+        <div class="c-dur">3 Weeks</div>
+        <div class="c-exit"><div class="c-exit-l">Exit Role</div><div class="c-exit-r">No-Code Frontend Developer / Webflow Designer</div></div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-num"><div class="c-num-n">04</div><div class="c-num-l">Course</div></div>
+      <div class="c-body">
+        <div class="c-title">Automation, APIs &amp; Integrations</div>
+        <div class="c-desc">Connect apps, automate processes end-to-end, handle REST APIs, webhooks, AI-powered automations, and error handling at scale.</div>
+        <div class="c-chips">
+          <span class="c-chip">Zapier &amp; Make</span>
+          <span class="c-chip">REST APIs &amp; JSON</span>
+          <span class="c-chip">Webhooks</span>
+          <span class="c-chip">AI Automations</span>
+          <span class="c-chip">Bubble API Connector</span>
+        </div>
+      </div>
+      <div class="c-meta">
+        <div class="c-dur">3 Weeks</div>
+        <div class="c-exit"><div class="c-exit-l">Exit Role</div><div class="c-exit-r">No-Code Automation &amp; Integration Specialist</div></div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-num"><div class="c-num-n">05</div><div class="c-num-l">Course</div></div>
+      <div class="c-body">
+        <div class="c-title">Scalable Backends, Payments &amp; AI</div>
+        <div class="c-desc">Separate frontend from backend. Set up Xano or Supabase, integrate Stripe subscriptions, and build AI-powered product features with OpenAI.</div>
+        <div class="c-chips">
+          <span class="c-chip">Xano / Supabase</span>
+          <span class="c-chip">Auth &amp; Security</span>
+          <span class="c-chip">Stripe Payments</span>
+          <span class="c-chip">Subscriptions</span>
+          <span class="c-chip">OpenAI Integration</span>
+        </div>
+      </div>
+      <div class="c-meta">
+        <div class="c-dur">4 Weeks</div>
+        <div class="c-exit"><div class="c-exit-l">Exit Role</div><div class="c-exit-r">No-Code SaaS Builder / Backend Specialist</div></div>
+      </div>
+    </div>
+
+    <div class="c-card final">
+      <div class="c-num"><div class="c-num-n">06</div><div class="c-num-l">Course</div></div>
+      <div class="c-body">
+        <div class="c-title">Portfolio, Freelancing &amp; Career Launch</div>
+        <div class="c-desc">Package your skills into a client-ready portfolio. Win your first projects, set your pricing, build your niche — and launch your no-code career or consultancy.</div>
+        <div class="c-chips">
+          <span class="c-chip">Portfolio Strategy</span>
+          <span class="c-chip">Client Proposals</span>
+          <span class="c-chip">Pricing &amp; Contracts</span>
+          <span class="c-chip">Upwork / LinkedIn</span>
+          <span class="c-chip">Capstone Build</span>
+        </div>
+      </div>
+      <div class="c-meta">
+        <div class="c-dur">2–3 Weeks</div>
+        <div class="c-exit"><div class="c-exit-l">Final Exit Role</div><div class="c-exit-r">Professional No-Code Consultant / Freelancer</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="sec sec-surface">
+  <div class="eyebrow">What You'll Build</div>
+  <h2 class="sec-h reveal">Real products. <em>Real portfolio.</em></h2>
+  <p class="sec-p reveal">Every course ends with a live project. Graduate with a portfolio of six production-ready apps — not certificates in a drawer.</p>
+
+  <div class="projects-grid reveal">
+    <div class="proj-card">
+      <div class="proj-num">01</div>
+      <div class="proj-title">Membership Portal</div>
+      <div class="proj-desc">Full auth, user dashboards, roles and permissions — built in Bubble from a real client brief.</div>
+      <div class="proj-tag">Bubble</div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">02</div>
+      <div class="proj-title">Blog / Content Platform</div>
+      <div class="proj-desc">CMS-driven, SEO-optimised content site with dynamic pages, interactions, and Webflow animations.</div>
+      <div class="proj-tag">Webflow</div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">03</div>
+      <div class="proj-title">Automated Onboarding System</div>
+      <div class="proj-desc">Form → email → CRM automation pipeline handling user onboarding without any manual intervention.</div>
+      <div class="proj-tag">Zapier / Make</div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">04</div>
+      <div class="proj-title">SaaS App with Stripe</div>
+      <div class="proj-desc">Subscription-based product with Xano backend, Stripe checkout, webhook handling, and billing management.</div>
+      <div class="proj-tag">Xano + Stripe</div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">05</div>
+      <div class="proj-title">AI-Powered Feature</div>
+      <div class="proj-desc">Content generator or intelligent chatbot built into a web app using the OpenAI API connector.</div>
+      <div class="proj-tag">OpenAI API</div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">06</div>
+      <div class="proj-title">Capstone — Your Choice</div>
+      <div class="proj-desc">LMS, Church Management System, marketplace, community app, or internal business dashboard. You choose, you build, you own it.</div>
+      <div class="proj-tag">Full Stack No-Code</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec sec-dark" id="pricing">
+  <div class="eyebrow">Programme Investment</div>
+  <h2 class="sec-h reveal">Choose your <em>track.</em></h2>
+  <p class="sec-p reveal" style="margin:0 auto 56px;">Same curriculum. Same certification. Two ways to learn — pick what fits your pace and goals.</p>
+
+  <div class="pricing-wrap reveal">
+
+    <div class="price-card">
+      <div class="price-mode">Self-Paced Track</div>
+      <div class="price-amount"><span>£</span>250</div>
+      <div class="price-sub">One-time payment · Lifetime access</div>
+      <div class="p-divider"></div>
+      <ul class="p-list">
+        <li><div class="chk">✓</div> Full 6-course curriculum — video lessons &amp; notes</li>
+        <li><div class="chk">✓</div> Learn anytime, anywhere, at your own pace</li>
+        <li><div class="chk">✓</div> Templates, worksheets &amp; project frameworks</li>
+        <li><div class="chk">✓</div> Certificate per course + full programme cert</li>
+        <li><div class="chk">✓</div> Lifetime access to all materials &amp; updates</li>
+      </ul>
+      <a href="https://form.jotform.com/260541505232042" target="_blank" class="p-btn p-btn-outline">Get Started →</a>
+    </div>
+
+    <div class="price-card hot">
+      <div class="hot-badge">Recommended</div>
+      <div class="price-mode">Live / Standard Track</div>
+      <div class="price-amount"><span>£</span>500</div>
+      <div class="price-sub">One-time payment · Full instructor access</div>
+      <div class="p-divider"></div>
+      <ul class="p-list">
+        <li><div class="chk">✓</div> Everything in Self-Paced, plus:</li>
+        <li><div class="chk">✓</div> 2 live instructor-led sessions per week (2hrs each)</li>
+        <li><div class="chk">✓</div> Real-time interaction &amp; immediate feedback</li>
+        <li><div class="chk">✓</div> Structured collaborative learning path</li>
+        <li><div class="chk">✓</div> Personalised project reviews &amp; mentorship</li>
+        <li><div class="chk">✓</div> Certification preparation &amp; career coaching</li>
+        <li><div class="chk">✓</div> CV &amp; LinkedIn profile optimisation</li>
+      </ul>
+      <a href="https://form.jotform.com/260541505232042" target="_blank" class="p-btn p-btn-solid">Enrol Now →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="sec" style="background:var(--void);" id="outcomes">
+  <div class="eyebrow">Career Outcomes</div>
+  <h2 class="sec-h reveal">Graduate with skills <em>employers pay for.</em></h2>
+  <p class="sec-p reveal">No-code development is one of the fastest-growing skill sets globally. Graduates enter freelance, employment, and founder tracks from day one.</p>
+
+  <div class="outcomes-grid reveal">
+    <div class="outcome-panel">
+      <div class="op-label">What You'll Be Able to Do</div>
+      <div class="op-title">Build, deploy, and monetise complete digital products — independently.</div>
+      <ul class="op-list">
+        <li>Design and launch responsive web apps from scratch using Bubble</li>
+        <li>Build CMS-driven, animated frontends with Webflow</li>
+        <li>Automate multi-step business workflows without code</li>
+        <li>Integrate external APIs, payment systems, and AI features</li>
+        <li>Set up scalable SaaS backends with authentication and subscriptions</li>
+        <li>Win clients, price projects, and operate as a no-code consultant</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-family:'Chivo Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Roles You Can Step Into</p>
+      <div class="roles-col">
+        <div class="role-row"><div class="role-name">No-Code Developer</div><div class="role-tag">Freelance · Agency</div></div>
+        <div class="role-row"><div class="role-name">Webflow Designer</div><div class="role-tag">Frontend · Startups</div></div>
+        <div class="role-row"><div class="role-name">Bubble App Developer</div><div class="role-tag">SaaS · Product</div></div>
+        <div class="role-row"><div class="role-name">Automation Specialist</div><div class="role-tag">Ops · Remote</div></div>
+        <div class="role-row"><div class="role-name">No-Code SaaS Builder</div><div class="role-tag">Founder · Tech</div></div>
+        <div class="role-row"><div class="role-name">No-Code Consultant</div><div class="role-tag">Consulting · Upwork</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec why-bg">
+  <div class="why-inner">
+    <div>
+      <div class="eyebrow">Why This Programme</div>
+      <h2 class="why-title">Build products. <span class="pop">Ship fast.</span> Get paid.</h2>
+      <p class="why-sub">The no-code economy is worth billions — and professionals who can build real, scalable products without writing code are in extraordinary demand. This is your entry point.</p>
+    </div>
+    <div class="why-cards reveal">
+      <div class="wc">
+        <div class="wc-icon">🏗️</div>
+        <div class="wc-title">Build Real Products</div>
+        <div class="wc-text">Every course ends with a live, deployed project — not a mock-up or a theory exercise.</div>
+      </div>
+      <div class="wc">
+        <div class="wc-icon">📈</div>
+        <div class="wc-title">Employable at Every Stage</div>
+        <div class="wc-text">Six exit roles mean you can start working before the programme even ends.</div>
+      </div>
+      <div class="wc">
+        <div class="wc-icon">🌍</div>
+        <div class="wc-title">Global Career Access</div>
+        <div class="wc-text">No-code skills are in demand across remote work platforms, agencies, and startups worldwide.</div>
+      </div>
+      <div class="wc">
+        <div class="wc-icon">🤖</div>
+        <div class="wc-title">AI-Ready Curriculum</div>
+        <div class="wc-text">Build AI-powered features into your apps using OpenAI — the skill every product team needs now.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="enrol">
+  <div class="cta-burst"></div>
+  <div class="cta-tag">Start Building</div>
+  <h2 class="cta-h">Your app idea<br><span class="gr">starts here.</span></h2>
+  <p class="cta-sub">Join the 2026/2027 cohort. Pick your learning mode, choose your track, and start building real digital products in week one.</p>
+  <div class="cta-btns">
+    <a href="https://form.jotform.com/260541505232042" target="_blank" class="btn-lime">Apply Now — 2026/27 →</a>
+    <a href="#courses" class="btn-outline">View Full Curriculum</a>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand">Sabi-<span>Educate</span></div>
+  <div class="f-meta">
+    No-Code App Development Program · 2026 / 2027<br>
+    Bubble · Webflow · Zapier · Xano · Stripe · OpenAI
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => {
+    es.forEach((e,i) => {
+      if(e.isIntersecting) setTimeout(()=>e.target.classList.add('on'), i*80);
+    });
+  }, {threshold:0.06});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t){ e.preventDefault(); window.scrollTo({top:t.getBoundingClientRect().top+scrollY-64,behavior:'smooth'}); }
+    });
+  });
+</script>
+</body>
+</html>
