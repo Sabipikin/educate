@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRC Professional Program | Sabi-Educate</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,500;0,600;0,700;0,800;0,900;1,700&family=Outfit:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════
+   TOKENS
+═══════════════════════════════ */
+:root{
+  --bg:       #060C18;
+  --bg2:      #080E1D;
+  --surface:  #0C1428;
+  --card:     #0F1830;
+  --card2:    #111C35;
+  --blue:     #0057FF;
+  --blue-mid: #1A6FFF;
+  --blue-pop: #3D8BFF;
+  --blue-glow:rgba(0,87,255,0.15);
+  --cyan:     #00C8FF;
+  --red:      #FF3B3B;
+  --amber:    #F59E0B;
+  --amber-lt: #FCD34D;
+  --white:    #EEF2FF;
+  --text:     #A8B8D8;
+  --muted:    #4A5A7A;
+  --border:   rgba(255,255,255,0.06);
+  --border2:  rgba(0,87,255,0.2);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Outfit',sans-serif;
+  font-weight:300;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+
+/* noise grain */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.5;
+}
+
+/* ── NAV ── */
+.nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(6,12,24,0.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  height:52px;display:flex;
+  align-items:center;justify-content:space-between;
+  padding:0 60px;
+}
+.nav-brand{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:16px;letter-spacing:0.08em;
+  text-transform:uppercase;color:var(--white);
+  display:flex;align-items:center;gap:10px;
+}
+.nav-brand::before{
+  content:'';width:8px;height:8px;
+  background:var(--blue);border-radius:50%;
+  box-shadow:0 0 8px var(--blue);
+  animation:blink 2.5s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--cyan);}
+.nav-cta{
+  font-family:'Outfit',sans-serif;font-weight:600;
+  font-size:12px;letter-spacing:0.06em;
+  background:var(--blue);color:var(--white);
+  padding:8px 20px;text-decoration:none;
+  transition:background 0.2s,box-shadow 0.2s;
+  border:none;
+}
+.nav-cta:hover{background:var(--blue-mid);box-shadow:0 0 20px rgba(0,87,255,0.4);}
+
+/* ═══════════════════════════════
+   HERO
+═══════════════════════════════ */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  padding:100px 60px 80px;
+  overflow:hidden;
+}
+
+/* hex grid bg */
+.hex-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 0 L56 15 L56 45 L28 60 L0 45 L0 15 Z' fill='none' stroke='rgba(0,87,255,0.06)' stroke-width='1'/%3E%3Cpath d='M28 40 L56 55 L56 85 L28 100 L0 85 L0 55 Z' fill='none' stroke='rgba(0,87,255,0.06)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size:56px 100px;
+  mask-image:radial-gradient(ellipse 90% 90% at 60% 40%, black 0%, transparent 75%);
+}
+
+.hero-orb1{
+  position:absolute;width:700px;height:700px;
+  background:radial-gradient(circle, rgba(0,87,255,0.12) 0%, transparent 65%);
+  top:-150px;right:-100px;pointer-events:none;
+}
+.hero-orb2{
+  position:absolute;width:400px;height:400px;
+  background:radial-gradient(circle, rgba(0,200,255,0.07) 0%, transparent 65%);
+  bottom:5%;left:5%;pointer-events:none;
+}
+
+/* scanning line animation */
+.scan-line{
+  position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(0,200,255,0.3), transparent);
+  animation:scan 6s linear infinite;pointer-events:none;
+}
+@keyframes scan{from{top:0;}to{top:100%;}}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:32px;
+  animation:fadeUp 0.6s ease both;
+}
+.hero-eyebrow span{
+  background:rgba(0,200,255,0.08);
+  border:1px solid rgba(0,200,255,0.2);
+  padding:4px 12px;
+}
+
+.hero-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:clamp(52px, 8vw, 110px);
+  line-height:0.88;
+  color:var(--white);
+  letter-spacing:-0.01em;
+  max-width:900px;
+  animation:fadeUp 0.6s 0.1s ease both;
+}
+.hero-title .grc{
+  display:block;
+  -webkit-text-stroke:2px var(--blue-pop);
+  color:transparent;
+  letter-spacing:0.04em;
+}
+.hero-title .line2{
+  display:block;color:var(--white);
+}
+
+.hero-rule{
+  width:80px;height:2px;
+  background:linear-gradient(90deg, var(--blue), var(--cyan));
+  margin:32px 0;
+  animation:fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-sub{
+  max-width:560px;font-size:16px;
+  color:var(--text);line-height:1.8;
+  animation:fadeUp 0.6s 0.2s ease both;
+}
+.hero-sub strong{color:var(--white);font-weight:500;}
+
+.hero-btns{
+  display:flex;gap:14px;margin-top:44px;flex-wrap:wrap;
+  animation:fadeUp 0.6s 0.3s ease both;
+}
+.btn-primary{
+  font-family:'Outfit',sans-serif;font-weight:600;
+  font-size:13px;letter-spacing:0.06em;text-transform:uppercase;
+  background:var(--blue);color:var(--white);
+  padding:14px 32px;text-decoration:none;display:inline-block;
+  border:2px solid var(--blue);
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.12),transparent);
+}
+.btn-primary:hover{background:var(--blue-mid);box-shadow:0 0 32px rgba(0,87,255,0.5);transform:translateY(-2px);}
+.btn-ghost{
+  font-family:'Outfit',sans-serif;font-weight:500;
+  font-size:13px;letter-spacing:0.06em;text-transform:uppercase;
+  background:transparent;color:var(--text);
+  padding:14px 32px;text-decoration:none;display:inline-block;
+  border:1px solid var(--border);
+  transition:all 0.25s;
+}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* hero stat strip */
+.hero-stats{
+  display:flex;gap:0;margin-top:72px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.02);
+  animation:fadeUp 0.6s 0.4s ease both;
+  width:fit-content;
+}
+.hstat{
+  padding:20px 36px;
+  border-right:1px solid var(--border);
+}
+.hstat:last-child{border-right:none;}
+.hstat-n{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:800;font-size:36px;color:var(--white);
+  line-height:1;
+}
+.hstat-n span{color:var(--blue-pop);}
+.hstat-l{
+  font-family:'Share Tech Mono',monospace;
+  font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);margin-top:4px;
+}
+
+/* ═══════════════════════════════
+   SHARED
+═══════════════════════════════ */
+.sec{padding:96px 60px;position:relative;}
+.sec-alt{background:var(--bg2);}
+
+.tag{
+  font-family:'Share Tech Mono',monospace;
+  font-size:9px;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--blue-pop);
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
+}
+.tag::before{content:'//';color:var(--muted);}
+
+.sec-h{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:800;font-size:clamp(32px,4.5vw,58px);
+  color:var(--white);line-height:0.95;letter-spacing:-0.01em;
+  max-width:700px;margin-bottom:16px;
+  text-transform:uppercase;
+}
+.sec-h em{font-style:italic;color:var(--blue-pop);font-weight:700;}
+.sec-p{font-size:15px;color:var(--text);max-width:560px;margin-bottom:56px;line-height:1.8;}
+
+/* ═══════════════════════════════
+   WHO SECTION
+═══════════════════════════════ */
+.who-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+}
+.who-card{
+  background:var(--card);padding:32px 36px;
+  display:flex;gap:20px;align-items:flex-start;
+  transition:background 0.3s;
+  position:relative;overflow:hidden;
+}
+.who-card::before{
+  content:'';position:absolute;
+  left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom, var(--blue), var(--cyan));
+  transform:scaleY(0);transform-origin:top;
+  transition:transform 0.3s;
+}
+.who-card:hover{background:var(--card2);}
+.who-card:hover::before{transform:scaleY(1);}
+.who-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:800;font-size:42px;line-height:1;
+  color:rgba(0,87,255,0.12);flex-shrink:0;
+  transition:color 0.3s;
+}
+.who-card:hover .who-num{color:rgba(0,87,255,0.25);}
+.who-text{font-size:14px;color:var(--text);line-height:1.7;padding-top:4px;}
+.who-text strong{color:var(--white);font-weight:600;display:block;margin-bottom:4px;font-size:15px;}
+
+/* ═══════════════════════════════
+   LEARN SECTION
+═══════════════════════════════ */
+.learn-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:40px;align-items:start;
+}
+.learn-list{
+  display:flex;flex-direction:column;gap:1px;
+  background:var(--border);border:1px solid var(--border);
+}
+.learn-item{
+  background:var(--card);padding:24px 28px;
+  display:flex;gap:18px;align-items:flex-start;
+  transition:background 0.25s,padding-left 0.25s;
+  cursor:default;
+}
+.learn-item:hover{background:var(--card2);padding-left:36px;}
+.learn-icon{
+  width:38px;height:38px;flex-shrink:0;
+  background:rgba(0,87,255,0.1);
+  border:1px solid rgba(0,87,255,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;margin-top:2px;
+  transition:background 0.25s,border-color 0.25s;
+}
+.learn-item:hover .learn-icon{background:rgba(0,200,255,0.1);border-color:rgba(0,200,255,0.3);}
+.learn-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px;}
+.learn-desc{font-size:12px;color:var(--muted);line-height:1.65;}
+
+.portfolio-box{
+  background:linear-gradient(135deg, rgba(0,87,255,0.08), rgba(0,200,255,0.04));
+  border:1px solid rgba(0,87,255,0.2);
+  padding:40px 36px;
+  position:relative;overflow:hidden;
+}
+.portfolio-box::before{
+  content:'PORTFOLIO';
+  position:absolute;top:20px;right:24px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:9px;letter-spacing:0.2em;
+  color:rgba(0,87,255,0.3);
+}
+.portfolio-box::after{
+  content:'';position:absolute;
+  bottom:-40px;right:-40px;
+  width:160px;height:160px;
+  border:1px solid rgba(0,87,255,0.08);
+  border-radius:50%;
+  box-shadow:0 0 0 30px rgba(0,87,255,0.03);
+}
+.pb-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:800;font-size:26px;color:var(--white);
+  text-transform:uppercase;margin-bottom:16px;
+  letter-spacing:-0.01em;line-height:1.1;
+}
+.pb-text{font-size:13px;color:var(--text);line-height:1.8;margin-bottom:24px;}
+.pb-items{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.pb-items li{
+  display:flex;gap:10px;font-size:13px;color:var(--text);
+  align-items:center;
+}
+.pb-items li::before{
+  content:'►';font-size:8px;color:var(--blue-pop);flex-shrink:0;
+}
+
+/* ═══════════════════════════════
+   CURRICULUM / TIMELINE
+═══════════════════════════════ */
+.timeline{
+  display:grid;gap:0;
+  border:1px solid var(--border);
+  position:relative;
+}
+.t-row{
+  display:grid;grid-template-columns:80px 1fr 220px;
+  border-bottom:1px solid var(--border);
+  background:var(--card);
+  transition:background 0.25s;
+  min-height:100px;
+}
+.t-row:last-child{border-bottom:none;}
+.t-row:hover{background:var(--card2);}
+
+.t-num{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:20px 0;
+  border-right:1px solid var(--border);
+  gap:8px;
+}
+.t-circle{
+  width:32px;height:32px;
+  border:2px solid var(--blue);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--blue-pop);
+  transition:background 0.25s,box-shadow 0.25s;
+}
+.t-row:hover .t-circle{
+  background:rgba(0,87,255,0.15);
+  box-shadow:0 0 12px rgba(0,87,255,0.4);
+}
+.t-mo{
+  font-family:'Share Tech Mono',monospace;
+  font-size:8px;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--muted);
+}
+
+.t-body{padding:22px 28px;border-right:1px solid var(--border);}
+.t-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:18px;
+  color:var(--white);text-transform:uppercase;
+  letter-spacing:0.02em;margin-bottom:6px;
+}
+.t-desc{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:12px;}
+.t-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.t-chip{
+  font-family:'Share Tech Mono',monospace;
+  font-size:9px;letter-spacing:0.06em;
+  color:var(--blue-pop);
+  background:rgba(0,87,255,0.07);
+  border:1px solid rgba(0,87,255,0.18);
+  padding:3px 9px;
+}
+
+.t-meta{
+  padding:22px 20px;
+  display:flex;flex-direction:column;
+  justify-content:space-between;gap:10px;
+}
+.t-role-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:8px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);
+}
+.t-role-box{
+  background:rgba(245,158,11,0.06);
+  border:1px solid rgba(245,158,11,0.2);
+  padding:10px 14px;
+}
+.t-role-name{font-size:11px;font-weight:600;color:var(--amber-lt);line-height:1.4;}
+
+/* ═══════════════════════════════
+   PRICING
+═══════════════════════════════ */
+.pricing-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+.price-card{
+  border:1px solid var(--border);
+  background:var(--card);
+  padding:44px 40px;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.price-card:hover{transform:translateY(-4px);}
+.price-card.recommended{
+  border-color:var(--blue);
+  background:var(--card2);
+}
+.price-card.recommended:hover{box-shadow:0 0 40px rgba(0,87,255,0.2);}
+.rec-badge{
+  position:absolute;top:20px;right:20px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:8px;letter-spacing:0.15em;text-transform:uppercase;
+  background:var(--blue);color:var(--white);
+  padding:4px 10px;
+}
+.price-tier{
+  font-family:'Share Tech Mono',monospace;
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+}
+.price-tag{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-size:68px;color:var(--white);
+  line-height:1;letter-spacing:-0.02em;margin-bottom:4px;
+}
+.price-tag span{font-size:28px;color:var(--blue-pop);vertical-align:top;margin-top:10px;display:inline-block;}
+.price-note{font-size:12px;color:var(--muted);margin-bottom:28px;}
+.price-divider{height:1px;background:var(--border);margin:24px 0;}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.price-features li{
+  display:flex;gap:12px;font-size:13px;color:var(--text);
+  align-items:flex-start;line-height:1.5;
+}
+.price-features li::before{
+  content:'✓';font-size:11px;
+  color:var(--blue-pop);flex-shrink:0;margin-top:1px;
+  font-weight:700;
+}
+.price-card.recommended .price-features li::before{color:var(--cyan);}
+.price-btn{
+  display:block;text-align:center;
+  font-family:'Outfit',sans-serif;font-weight:600;
+  font-size:13px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:14px;margin-top:32px;text-decoration:none;
+  transition:all 0.25s;
+}
+.price-btn-outline{
+  border:1px solid var(--border);color:var(--text);
+}
+.price-btn-outline:hover{border-color:var(--blue-pop);color:var(--blue-pop);}
+.price-btn-solid{
+  background:var(--blue);color:var(--white);
+  border:2px solid var(--blue);
+}
+.price-btn-solid:hover{background:var(--blue-mid);box-shadow:0 0 24px rgba(0,87,255,0.4);}
+
+/* ═══════════════════════════════
+   CERTIFICATIONS
+═══════════════════════════════ */
+.cert-track{
+  display:flex;gap:0;
+  border:1px solid var(--border);
+  background:var(--border);
+  flex-wrap:wrap;
+}
+.cert-item{
+  flex:1;min-width:200px;
+  background:var(--card);padding:32px 28px;
+  border-right:1px solid var(--border);
+  transition:background 0.25s;
+  position:relative;overflow:hidden;
+}
+.cert-item:last-child{border-right:none;}
+.cert-item:hover{background:var(--card2);}
+.cert-item::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg, var(--blue), var(--cyan));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s;
+}
+.cert-item:hover::after{transform:scaleX(1);}
+.cert-abbr{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-size:36px;
+  color:rgba(61,139,255,0.15);line-height:1;
+  margin-bottom:12px;transition:color 0.25s;letter-spacing:0.02em;
+}
+.cert-item:hover .cert-abbr{color:rgba(61,139,255,0.3);}
+.cert-name{
+  font-size:13px;font-weight:600;color:var(--white);
+  margin-bottom:6px;line-height:1.3;
+}
+.cert-desc{font-size:11px;color:var(--muted);line-height:1.6;}
+
+/* ═══════════════════════════════
+   WHY SECTION
+═══════════════════════════════ */
+.why-bg{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg, var(--surface) 0%, var(--bg2) 100%);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.why-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:64px;align-items:center;
+}
+.why-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-size:clamp(36px,5vw,64px);
+  color:var(--white);text-transform:uppercase;
+  line-height:0.9;letter-spacing:-0.01em;
+}
+.why-title em{
+  font-style:italic;
+  background:linear-gradient(135deg, var(--blue-pop), var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.why-sub{font-size:14px;color:var(--text);margin-top:20px;line-height:1.8;max-width:380px;}
+.why-items{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--border);border:1px solid var(--border);
+}
+.why-item{
+  background:var(--card);padding:28px 24px;
+  transition:background 0.25s;
+}
+.why-item:hover{background:var(--card2);}
+.wi-icon{font-size:24px;margin-bottom:14px;}
+.wi-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:6px;}
+.wi-text{font-size:12px;color:var(--muted);line-height:1.65;}
+
+/* ═══════════════════════════════
+   CTA
+═══════════════════════════════ */
+.cta-sec{
+  position:relative;overflow:hidden;
+  background:var(--bg);
+  text-align:center;padding:120px 60px;
+}
+.cta-orb{
+  position:absolute;width:600px;height:600px;
+  background:radial-gradient(circle, rgba(0,87,255,0.1) 0%, transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.cta-ring{
+  position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:500px;
+  border:1px solid rgba(0,87,255,0.06);border-radius:50%;
+  box-shadow:0 0 0 80px rgba(0,87,255,0.03), 0 0 0 160px rgba(0,87,255,0.015);
+  pointer-events:none;
+}
+.cta-tag{
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--blue-pop);margin-bottom:20px;
+}
+.cta-h{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-size:clamp(42px,6vw,80px);
+  color:var(--white);text-transform:uppercase;
+  line-height:0.9;letter-spacing:-0.01em;
+  max-width:800px;margin:0 auto 20px;
+}
+.cta-h em{
+  font-style:italic;
+  background:linear-gradient(90deg, var(--blue-pop), var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.cta-sub{
+  font-size:15px;color:var(--text);
+  max-width:480px;margin:0 auto 48px;line-height:1.8;
+}
+.cta-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
+
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+footer{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  padding:32px 60px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:16px;
+}
+.foot-brand{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:800;font-size:20px;color:var(--white);
+  text-transform:uppercase;letter-spacing:0.05em;
+}
+.foot-brand span{color:var(--blue-pop);}
+.foot-meta{
+  font-family:'Share Tech Mono',monospace;
+  font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);text-align:right;line-height:1.9;
+}
+
+/* ═══════════════════════════════
+   ANIMATIONS
+═══════════════════════════════ */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:none;}
+}
+.reveal{
+  opacity:0;transform:translateY(16px);
+  transition:opacity 0.6s ease,transform 0.6s ease;
+}
+.reveal.on{opacity:1;transform:none;}
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .hero,.sec{padding:56px 24px;}
+  .hero-stats{flex-wrap:wrap;}
+  .hstat{padding:16px 24px;}
+  .who-grid,.learn-grid,.pricing-grid,.why-grid,.why-items{grid-template-columns:1fr;}
+  .t-row{grid-template-columns:60px 1fr;}
+  .t-meta{display:none;}
+  .cert-track{flex-direction:column;}
+  .cert-item{border-right:none;border-bottom:1px solid var(--border);}
+  .cta-sec{padding:72px 24px;}
+  footer{padding:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">Sabi-Educate <span style="color:var(--muted);font-weight:300;font-size:12px;letter-spacing:0.05em;text-transform:none;margin-left:4px;">GRC Program</span></div>
+  <div class="nav-links">
+    <a href="#who">Who It's For</a>
+    <a href="#learn">Curriculum</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#certs">Certifications</a>
+    <a href="#enrol">Enrol</a>
+  </div>
+  <a href="https://form.jotform.com/260541505232042" target="_blank" class="nav-cta">Apply Now →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hex-bg"></div>
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+  <div class="scan-line"></div>
+
+  <div class="hero-eyebrow">
+    <span>Programme Prospectus · 2026 / 2027</span>
+  </div>
+
+  <h1 class="hero-title">
+    <span class="grc">GRC</span>
+    <span class="line2">Professional</span>
+    <span class="line2">Program</span>
+  </h1>
+
+  <div class="hero-rule"></div>
+
+  <p class="hero-sub">
+    Fast-track your career in <strong>Governance, Risk &amp; Compliance.</strong><br>
+    Master enterprise risk, lead compliance, and secure high-demand global roles — in just 6 months.
+  </p>
+
+  <div class="hero-btns">
+    <a href="https://form.jotform.com/260541505232042" target="_blank" class="btn-primary">Enrol Now →</a>
+    <a href="#learn" class="btn-ghost">View Curriculum</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-n">6<span>mo</span></div>
+      <div class="hstat-l">Duration</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n">6<span>+</span></div>
+      <div class="hstat-l">Exit Roles</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n">4</div>
+      <div class="hstat-l">Certifications</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n">$<span style="font-size:28px;">250</span></div>
+      <div class="hstat-l">Starting From</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="sec sec-alt" id="who">
+  <div class="tag">Who Should Join</div>
+  <h2 class="sec-h reveal">Built for professionals <em>ready to lead.</em></h2>
+  <p class="sec-p reveal">No prior GRC experience required. Whether you're entering the field or pivoting from a related discipline, this programme is designed to get you job-ready fast.</p>
+
+  <div class="who-grid reveal">
+    <div class="who-card">
+      <div class="who-num">01</div>
+      <div class="who-text">
+        <strong>Graduates &amp; Career Starters</strong>
+        Seeking corporate or remote roles in compliance, risk, and governance at leading organisations globally.
+      </div>
+    </div>
+    <div class="who-card">
+      <div class="who-num">02</div>
+      <div class="who-text">
+        <strong>Professionals in Transition</strong>
+        Entering Risk, Compliance, or Audit roles from adjacent fields — finance, legal, operations, or administration.
+      </div>
+    </div>
+    <div class="who-card">
+      <div class="who-num">03</div>
+      <div class="who-text">
+        <strong>IT &amp; Cybersecurity Professionals</strong>
+        Bridging the gap between technical infrastructure and business risk with formal GRC credentials.
+      </div>
+    </div>
+    <div class="who-card">
+      <div class="who-num">04</div>
+      <div class="who-text">
+        <strong>Finance Professionals</strong>
+        Adding regulatory compliance and enterprise risk management to an existing financial skill set.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARN -->
+<section class="sec" id="learn">
+  <div class="tag">What You'll Learn</div>
+  <h2 class="sec-h reveal">Five disciplines. <em>One complete</em> GRC skill set.</h2>
+  <p class="sec-p reveal">You don't just learn theory — you build a professional GRC portfolio that demonstrates real-world capability to employers.</p>
+
+  <div class="learn-grid reveal">
+    <div class="learn-list">
+      <div class="learn-item">
+        <div class="learn-icon">🏛️</div>
+        <div>
+          <div class="learn-title">Enterprise Governance &amp; Internal Controls</div>
+          <div class="learn-desc">Understand organisational structures, accountability frameworks, board-level ethics, and internal control design.</div>
+        </div>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">⚖️</div>
+        <div>
+          <div class="learn-title">Risk Management &amp; ERM</div>
+          <div class="learn-desc">Identify, assess, and manage enterprise risks using professional frameworks including COSO and ISO 31000.</div>
+        </div>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">📋</div>
+        <div>
+          <div class="learn-title">Regulatory Compliance &amp; Policy Writing</div>
+          <div class="learn-desc">Master policy documentation, regulatory mapping, compliance programme design, and audit readiness.</div>
+        </div>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">🔐</div>
+        <div>
+          <div class="learn-title">Cybersecurity Governance</div>
+          <div class="learn-desc">Bridge IT and business risk. Apply ISO 27001 and NIST frameworks to real-world cybersecurity governance challenges.</div>
+        </div>
+      </div>
+      <div class="learn-item">
+        <div class="learn-icon">📊</div>
+        <div>
+          <div class="learn-title">GRC Analytics &amp; Automation</div>
+          <div class="learn-desc">Create KRI dashboards, track risk indicators, and automate compliance reporting using modern no-code tools.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-box">
+      <div class="pb-title">You graduate with a professional GRC portfolio.</div>
+      <div class="pb-text">Every module produces a real deliverable. By graduation, you hold a portfolio of six project-ready artefacts that demonstrate genuine capability — not just course completion.</div>
+      <ul class="pb-items">
+        <li>Risk Register &amp; Enterprise Risk Assessment</li>
+        <li>Compliance Policy Documentation Pack</li>
+        <li>Cybersecurity Governance Framework</li>
+        <li>KRI Dashboard &amp; Risk Monitoring System</li>
+        <li>Audit Readiness Report</li>
+        <li>Capstone: Full GRC Programme Design</li>
+      </ul>
+      <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--border);">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Industries You Can Enter</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:11px;color:var(--text);background:rgba(255,255,255,0.03);border:1px solid var(--border);padding:4px 12px;">Banking &amp; Fintech</span>
+          <span style="font-size:11px;color:var(--text);background:rgba(255,255,255,0.03);border:1px solid var(--border);padding:4px 12px;">Technology</span>
+          <span style="font-size:11px;color:var(--text);background:rgba(255,255,255,0.03);border:1px solid var(--border);padding:4px 12px;">Consulting</span>
+          <span style="font-size:11px;color:var(--text);background:rgba(255,255,255,0.03);border:1px solid var(--border);padding:4px 12px;">Global Enterprises</span>
+          <span style="font-size:11px;color:var(--text);background:rgba(255,255,255,0.03);border:1px solid var(--border);padding:4px 12px;">Government</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM TIMELINE -->
+<section class="sec sec-alt">
+  <div class="tag">Programme Structure</div>
+  <h2 class="sec-h reveal">Six months. <em>Six job-ready</em> milestones.</h2>
+  <p class="sec-p reveal">Each month produces an exit role — meaning you can enter the workforce before the programme is complete, then keep building.</p>
+
+  <div class="timeline reveal">
+
+    <div class="t-row">
+      <div class="t-num"><div class="t-circle">01</div><div class="t-mo">Month</div></div>
+      <div class="t-body">
+        <div class="t-title">Governance Foundations</div>
+        <div class="t-desc">Enterprise governance structures, internal control frameworks, accountability systems, and organisational ethics.</div>
+        <div class="t-chips">
+          <span class="t-chip">Governance Frameworks</span>
+          <span class="t-chip">Internal Controls</span>
+          <span class="t-chip">Board Accountability</span>
+          <span class="t-chip">Ethics &amp; Culture</span>
+        </div>
+      </div>
+      <div class="t-meta">
+        <div class="t-role-label">Exit Role</div>
+        <div class="t-role-box"><div class="t-role-name">Governance Associate / Junior Compliance Officer</div></div>
+      </div>
+    </div>
+
+    <div class="t-row">
+      <div class="t-num"><div class="t-circle">02</div><div class="t-mo">Month</div></div>
+      <div class="t-body">
+        <div class="t-title">Risk Management &amp; ERM</div>
+        <div class="t-desc">Enterprise risk identification, COSO &amp; ISO 31000, risk registers, heat maps, and risk appetite frameworks.</div>
+        <div class="t-chips">
+          <span class="t-chip">ERM Frameworks</span>
+          <span class="t-chip">Risk Assessment</span>
+          <span class="t-chip">Risk Registers</span>
+          <span class="t-chip">COSO / ISO 31000</span>
+        </div>
+      </div>
+      <div class="t-meta">
+        <div class="t-role-label">Exit Role</div>
+        <div class="t-role-box"><div class="t-role-name">Junior Risk Analyst</div></div>
+      </div>
+    </div>
+
+    <div class="t-row">
+      <div class="t-num"><div class="t-circle">03</div><div class="t-mo">Month</div></div>
+      <div class="t-body">
+        <div class="t-title">Regulatory Compliance &amp; Policy Development</div>
+        <div class="t-desc">Policy writing, regulatory mapping, compliance programme design, and preparing organisations for audit.</div>
+        <div class="t-chips">
+          <span class="t-chip">Policy Documentation</span>
+          <span class="t-chip">Regulatory Mapping</span>
+          <span class="t-chip">Audit Readiness</span>
+          <span class="t-chip">Compliance Programmes</span>
+        </div>
+      </div>
+      <div class="t-meta">
+        <div class="t-role-label">Exit Role</div>
+        <div class="t-role-box"><div class="t-role-name">Compliance Officer / Compliance Specialist</div></div>
+      </div>
+    </div>
+
+    <div class="t-row">
+      <div class="t-num"><div class="t-circle">04</div><div class="t-mo">Month</div></div>
+      <div class="t-body">
+        <div class="t-title">Cybersecurity Governance &amp; IT Risk</div>
+        <div class="t-desc">Bridge IT and business risk. Apply ISO 27001, NIST CSF, and IT risk assessment to real enterprise scenarios.</div>
+        <div class="t-chips">
+          <span class="t-chip">ISO 27001</span>
+          <span class="t-chip">NIST CSF</span>
+          <span class="t-chip">IT Risk Assessment</span>
+          <span class="t-chip">Cyber Governance</span>
+        </div>
+      </div>
+      <div class="t-meta">
+        <div class="t-role-label">Exit Role</div>
+        <div class="t-role-box"><div class="t-role-name">Cyber GRC Analyst / IT Risk Associate</div></div>
+      </div>
+    </div>
+
+    <div class="t-row">
+      <div class="t-num"><div class="t-circle">05</div><div class="t-mo">Month</div></div>
+      <div class="t-body">
+        <div class="t-title">GRC Data Analytics &amp; Control Monitoring</div>
+        <div class="t-desc">Build KRI dashboards, automate compliance reporting, and implement continuous risk monitoring using no-code platforms.</div>
+        <div class="t-chips">
+          <span class="t-chip">KRI Dashboards</span>
+          <span class="t-chip">Compliance Automation</span>
+          <span class="t-chip">Control Monitoring</span>
+          <span class="t-chip">Risk Reporting</span>
+        </div>
+      </div>
+      <div class="t-meta">
+        <div class="t-role-label">Exit Role</div>
+        <div class="t-role-box"><div class="t-role-name">GRC Analyst / Risk Reporting Analyst</div></div>
+      </div>
+    </div>
+
+    <div class="t-row" style="background:var(--surface);">
+      <div class="t-num"><div class="t-circle" style="border-color:var(--amber);color:var(--amber-lt);">06</div><div class="t-mo">Month</div></div>
+      <div class="t-body">
+        <div class="t-title" style="color:var(--amber-lt);">Audit, Control Testing &amp; Capstone</div>
+        <div class="t-desc">Design and deliver a complete GRC programme. Portfolio presentation, career coaching, and professional certification readiness.</div>
+        <div class="t-chips">
+          <span class="t-chip" style="color:var(--amber-lt);background:rgba(245,158,11,0.07);border-color:rgba(245,158,11,0.2);">Audit Execution</span>
+          <span class="t-chip" style="color:var(--amber-lt);background:rgba(245,158,11,0.07);border-color:rgba(245,158,11,0.2);">Control Testing</span>
+          <span class="t-chip" style="color:var(--amber-lt);background:rgba(245,158,11,0.07);border-color:rgba(245,158,11,0.2);">Portfolio Presentation</span>
+          <span class="t-chip" style="color:var(--amber-lt);background:rgba(245,158,11,0.07);border-color:rgba(245,158,11,0.2);">Career Launch</span>
+        </div>
+      </div>
+      <div class="t-meta">
+        <div class="t-role-label">Final Exit Roles</div>
+        <div class="t-role-box"><div class="t-role-name">GRC Analyst / Audit Associate / Risk &amp; Compliance Officer</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="pricing">
+  <div class="tag">Programme Investment</div>
+  <h2 class="sec-h reveal">Accessible pricing. <em>Global career</em> returns.</h2>
+  <p class="sec-p reveal">Choose the learning mode that fits your pace and goals. Both tracks deliver the same comprehensive GRC curriculum and certification.</p>
+
+  <div class="pricing-grid reveal">
+
+    <div class="price-card">
+      <div class="price-tier">Self-Paced Track</div>
+      <div class="price-tag"><span>$</span>250</div>
+      <div class="price-note">One-time payment · Lifetime access</div>
+      <div class="price-divider"></div>
+      <ul class="price-features">
+        <li>Full 6-month GRC curriculum access</li>
+        <li>Professional templates &amp; frameworks library</li>
+        <li>Capstone project guide</li>
+        <li>Certificate of completion</li>
+        <li>Learn at your own pace</li>
+      </ul>
+      <a href="https://form.jotform.com/260541505232042" target="_blank" class="price-btn price-btn-outline">Get Started →</a>
+    </div>
+
+    <div class="price-card recommended">
+      <div class="rec-badge">Recommended</div>
+      <div class="price-tier">Standard Track</div>
+      <div class="price-tag"><span>$</span>500</div>
+      <div class="price-note">One-time payment · Full instructor access</div>
+      <div class="price-divider"></div>
+      <ul class="price-features">
+        <li>Everything in Self-Paced, plus:</li>
+        <li>Live sessions with expert instructors</li>
+        <li>Project reviews &amp; personalised feedback</li>
+        <li>Career guidance &amp; interview coaching</li>
+        <li>CV &amp; LinkedIn profile optimisation</li>
+        <li>Priority support &amp; community access</li>
+      </ul>
+      <a href="https://form.jotform.com/260541505232042" target="_blank" class="price-btn price-btn-solid">Enrol Now →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="sec sec-alt" id="certs">
+  <div class="tag">Certification Readiness</div>
+  <h2 class="sec-h reveal">Prepared for the <em>world's most respected</em> GRC credentials.</h2>
+  <p class="sec-p reveal">The programme curriculum is aligned to the core knowledge domains of four globally recognised certifications. Graduate ready to sit the exam.</p>
+
+  <div class="cert-track reveal">
+    <div class="cert-item">
+      <div class="cert-abbr">CRISC</div>
+      <div class="cert-name">Certified in Risk &amp; Information Systems Control</div>
+      <div class="cert-desc">ISACA's premier certification for IT risk and control professionals.</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-abbr">CISA</div>
+      <div class="cert-name">Certified Information Systems Auditor</div>
+      <div class="cert-desc">Globally recognised audit and assurance credential by ISACA.</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-abbr">ISO<br>27001</div>
+      <div class="cert-name">ISO 27001 Lead Implementer</div>
+      <div class="cert-desc">International standard for information security management systems.</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-abbr">CRA</div>
+      <div class="cert-name">Certified Risk Analyst</div>
+      <div class="cert-desc">Professional certification recognising enterprise risk management competency.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec why-bg">
+  <div class="why-grid">
+    <div>
+      <div class="tag">Why Sabi-Educate</div>
+      <h2 class="why-title">The GRC programme built for <em>real employment.</em></h2>
+      <p class="why-sub">Not a theory course. Not just a certificate. A structured path to a job in one of the fastest-growing compliance markets in the world.</p>
+    </div>
+    <div class="why-items reveal">
+      <div class="why-item">
+        <div class="wi-icon">🎯</div>
+        <div class="wi-title">Industry-Relevant Curriculum</div>
+        <div class="wi-text">Designed with employer expectations in mind. Every module maps to what organisations are hiring for.</div>
+      </div>
+      <div class="why-item">
+        <div class="wi-icon">🛠️</div>
+        <div class="wi-title">Hands-On Projects</div>
+        <div class="wi-text">Real-world simulations and project deliverables that make your portfolio stand out from day one.</div>
+      </div>
+      <div class="why-item">
+        <div class="wi-icon">💰</div>
+        <div class="wi-title">Affordable for Global Access</div>
+        <div class="wi-text">World-class GRC training at a price accessible to professionals across all markets.</div>
+      </div>
+      <div class="why-item">
+        <div class="wi-icon">🧑‍🏫</div>
+        <div class="wi-title">Expert Instructors &amp; Live Guidance</div>
+        <div class="wi-text">Learn from practitioners who operate in GRC, Risk, and Compliance at enterprise level.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="enrol">
+  <div class="cta-orb"></div>
+  <div class="cta-ring"></div>
+  <div class="cta-tag">// Enrol Today</div>
+  <h2 class="cta-h">Secure Your <em>Future</em> in GRC.</h2>
+  <p class="cta-sub">Seats are limited. Start building your career in Governance, Risk &amp; Compliance today. Your next role is six months away.</p>
+  <div class="cta-btns">
+    <a href="https://form.jotform.com/260541505232042" target="_blank" class="btn-primary">Apply Now — 2026/27 Cohort →</a>
+    <a href="#learn" class="btn-ghost">View Full Curriculum</a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-brand">Sabi-<span>Educate</span></div>
+  <div class="foot-meta">
+    GRC Professional Program · 2026 / 2027<br>
+    Governance · Risk Management · Compliance · Cybersecurity
+  </div>
+</footer>
+
+<script>
+  // Scroll reveals
+  const io = new IntersectionObserver(es => {
+    es.forEach((e,i) => {
+      if(e.isIntersecting) setTimeout(()=>e.target.classList.add('on'), i*80);
+    });
+  }, {threshold:0.07});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Smooth scroll with nav offset
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t){
+        e.preventDefault();
+        window.scrollTo({top: t.getBoundingClientRect().top + scrollY - 60, behavior:'smooth'});
+      }
+    });
+  });
+</script>
+</body>
+</html>
